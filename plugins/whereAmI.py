@@ -49,7 +49,7 @@ class location(Plugin):
                 elif language == 'fr-FR':
                     the_header="Votre position"
                 else:
-                    self.say("This is your location {0}".format(self.user_name()))
+                    self.say(u"This is your location {0}".format(self.user_name()))
                     the_header="Your location"
                 Location=SiriLocation(the_header, street, city, stateLong, countryCode, postalCode, latitude, longitude)
                 mapsnippet = SiriMapItemSnippet(items=[SiriMapItem(the_header, Location)])
