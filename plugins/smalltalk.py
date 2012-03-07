@@ -189,7 +189,7 @@ class smalltalk(Plugin):
     @register("de-DE", "(.*Hallo.*)|(.*Hi.*Siri.*)|(Hi)|(Hey)")
     @register("en-US", "(.*Hello.*)|(.*Hi.*Siri.*)|(Hi)|(Hey)")
     @register("fr-FR", ".*(Bonjour|Coucou|Salut)( Siri)?.*")
-    @register("zh-CN", "(.*你好.*)|(.*嗨.*Siri.*)|(嗨)|(嘿)|(喂)")
+    @register("zh-CN", u"(.*你好.*)|(.*嗨.*Siri.*)|(嗨)|(嘿)|(喂)")
     def st_hello(self, speech, language):
         if language == 'de-DE':
             self.say(u"Hallo {0}!".format(self.user_name()))

@@ -8,7 +8,7 @@ class examplePlugin(Plugin):
     
     @register("de-DE", ".*Sinn.*Leben.*")
     @register("en-US", ".*Meaning.*Life.*")
-    @register("zh-CN", ".*生.*意义.*")
+    @register("zh-CN", u".*生.*意义.*")
     def meaningOfLife(self, speech, language):
         if language == 'de-DE':
             answer = self.ask(u"Willst du das wirklich wissen?")
@@ -16,12 +16,12 @@ class examplePlugin(Plugin):
         elif language == 'en-US':
             self.say("I shouldn't tell you!")
         elif language == 'zh-CN':
-            self.say("这很难说。")
+            self.say(u"这很难说。")
         self.complete_request()
 
     @register("de-DE", ".*standort.*test.*")
     @register("en-US", ".*location.*test.*")
-    @register("zh-CN", ".*位置.*测试.*")
+    @register("zh-CN", u".*位置.*测试.*")
     def locationTest(self, speech, language):
         location = self.getCurrentLocation(force_reload=True)
         if language == 'zh-CN':
