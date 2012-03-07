@@ -9,6 +9,7 @@ pluginPath="plugins"
 from plugin import *
 tline_answer_de = ''
 tline_answer_en = ''
+tline_answer_zh = ''
 
 with open(config_file, "r") as fh:
     for line in fh:

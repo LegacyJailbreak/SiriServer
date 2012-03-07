@@ -681,4 +681,12 @@ class smalltalk(Plugin):
             self.say(u"J'aurais voulu être un artiste...")
             self.say(u"Désolé, je devrais payer des royalties si j'en dis plus.")
         self.complete_request()
-     
+
+    @register("zh-CN", u".*水哥.*")
+    @register("en-US", ".*mr.*water.*")
+    def st_mr_water(self, speech, language):
+        if language == 'zh-CN':
+            self.say(u"水哥啊？他是蛋疼帝。")
+        else:
+            self.say(u"Mr. Water? Ha, ha. He is always egg-ache.")
+        self.complete_request()
