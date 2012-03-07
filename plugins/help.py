@@ -46,7 +46,7 @@ class help(Plugin):
             self.say("".join(tline_answer_de ),' ')
         elif language == 'zh-CN':
             self.say(u"当前语言的可用命令如下：")
-            self.say("".join(tline_answer_zh ),' ')
+            self.say(str(tline_answer_zh.encode("utf-8")),' ')
         else:
             self.say("Here are the command which are possible in your language:")
             self.say(tline_answer_en ,' ')
