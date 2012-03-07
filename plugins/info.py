@@ -8,21 +8,24 @@ from plugin import *
 
 class talkToMe(Plugin):   
         
-    @register("de-DE", ".*Dein.*Status.*")
-    @register("en-GB", ".*Your.*Status.*")
+    @register("de-DE", ".*status.*")
+    @register("en-US", ".*status.*")
     def ttm_uptime_status(self, speech, language):
         uptime = os.popen("uptime").read()
+        freemem = os.popen("grep MemFree /proc/meminfo").read()
         if language == 'de-DE':
             self.say('Hier ist der Status:')
             self.say(uptime, ' ')
+            self.say(freemem, ' ') 
         else:
             self.say('Here is the status:')
-            self.say(uptime, ' ')
+            self.say(uptime, 'This is running time.')
+            self.say(freemem, 'And size of free memory.')
         self.complete_request()     
     
     
     @register("de-DE", "(Welcher Tag.*)|(Welches Datum.*)")
-    @register("en-GB", "(What Day.*)|(What.*Date.*)")
+    @register("en-US", "(What Day.*)|(What.*Date.*)")
     
     def ttm_say_date(self, speech, language):
         now = date.today()
