@@ -9,50 +9,66 @@ import json
 import math
 from plugin import *
 
+from siriObjects.baseObjects import AceObject, ClientBoundCommand
 from siriObjects.uiObjects import AddViews, AssistantUtteranceView
 from siriObjects.mapObjects import SiriMapItemSnippet,SiriLocation, SiriMapItem
 from siriObjects.systemObjects import GetRequestOrigin,Location
 
 class location(Plugin):
 
-    @register("de-DE", "(Wo bin ich.*)")     
-    @register("en-US", "(Where am I.*)")
-    @register("fr-FR", u"((ou|où).*suis.*je.*)")
+    @register("de-DE", "(Wo bin ich.*)")    
+    @register("en-US", "(Where am I.*)|(What is my location.*)")
+    @register("fr-FR", u'(Où suis-je.*)')
     def whereAmI(self, speech, language):
-        location = self.getCurrentLocation(force_reload=True,accuracy=GetRequestOrigin.desiredAccuracyBest)
-        url = "http://maps.googleapis.com/maps/api/geocode/json?latlng={0},{1}&sensor=false&language={2}".format(str(location.latitude),str(location.longitude), language)
-        jsonString = None
-        city = ""
-        country = ""
-        state = ""
-        stateLong = ""
-        countryCode = ""
-        result = ""
-        street = ""
-        postal_code = ""
+        mapGetLocation = self.getCurrentLocation()
+        latitude = mapGetLocation.latitude
+        longitude = mapGetLocation.longitude
+        url = u"http://maps.googleapis.com/maps/api/geocode/json?latlng={0},{1}&sensor=false&language={2}".format(str(latitude),str(longitude), language)
         try:
-	        jsonString = urllib2.urlopen(url, timeout=3).read()
-	        response = json.loads(jsonString)
-	        components = response['results'][0]['address_components']
-	        result = response['results'][0]['formatted_address'];
+            jsonString = urllib2.urlopen(url, timeout=3).read()
         except:
-	        pass
-        if components != None:
-            city = filter(lambda x: True if "locality" in x['types'] or "administrative_area_level_1" in x['types'] else False, components)[0]['long_name']
-            country = filter(lambda x: True if "country" in x['types'] else False, components)[0]['long_name']
-            state = filter(lambda x: True if "administrative_area_level_1" in x['types'] or "country" in x['types'] else False, components)[0]['short_name']
-            stateLong = filter(lambda x: True if "administrative_area_level_1" in x['types'] or "country" in x['types'] else False, components)[0]['long_name']
-            countryCode = filter(lambda x: True if "country" in x['types'] else False, components)[0]['short_name']
-            street = filter(lambda x: True if "route" in x['types'] else False, components)[0]['short_name']
-            street_number = filter(lambda x: True if "street_number" in x['types'] else False, components)[0]['short_name']
-            street = street + " " + street_number
-            postal_code = filter(lambda x: True if "postal_code" in x['types'] else False, components)[0]['short_name']
-
-        view = AddViews(self.refId, dialogPhase="Completion")
-        mapsnippet = SiriMapItemSnippet(items=[SiriMapItem(result, SiriLocation(result, street, city, state, countryCode, postal_code, location.latitude, location.longitude))])
-        view.views = [AssistantUtteranceView(text="Du bist mit mir hier...", dialogIdentifier="Map#test"), mapsnippet]
-        self.sendRequestWithoutAnswer(view)
-        self.say(u"Du bist mit mir bei, "+result)
+            pass
+        if jsonString != None:
+            response = json.loads(jsonString)
+            if response['status'] == 'OK':
+                components = response['results'][0]['address_components']              
+                street = filter(lambda x: True if "route" in x['types'] else False, components)[0]['long_name']
+                stateLong= filter(lambda x: True if "administrative_area_level_1" in x['types'] or "country" in x['types'] else False, components)[0]['long_name']
+                try:
+                    postalCode= filter(lambda x: True if "postal_code" in x['types'] else False, components)[0]['long_name']
+                except:
+                    postalCode=""
+                try:
+                    city = filter(lambda x: True if "locality" in x['types'] or "administrative_area_level_1" in x['types'] else False, components)[0]['long_name']
+                except:
+                    city=""
+                countryCode = filter(lambda x: True if "country" in x['types'] else False, components)[0]['short_name']
+                view = AddViews(self.refId, dialogPhase="Completion")
+                if language == "de-DE":
+                    the_header="Dein Standort"
+                elif language == 'fr-FR':
+                    the_header="Votre position"
+                else:
+                    self.say("This is your location {0}".format(self.user_name()))
+                    the_header="Your location"
+                Location=SiriLocation(the_header, street, city, stateLong, countryCode, postalCode, latitude, longitude)
+                mapsnippet = SiriMapItemSnippet(items=[SiriMapItem(the_header, Location)])
+                view.views = [AssistantUtteranceView(text=the_header, dialogIdentifier="Map"), mapsnippet]
+                self.sendRequestWithoutAnswer(view)
+            else:
+                if language=="de-DE":
+                    self.say('Die Googlemaps informationen waren ungenügend!','Fehler')
+                elif language == 'fr-FR':
+                    self.say(u"La réponse de Googlemaps ne contient pas l'information nécessaire",'Erreur')
+                else:
+                    self.say('The Googlemaps response did not hold the information i need!','Error')
+        else:
+            if language=="de-DE":
+                self.say('Ich konnte keine Verbindung zu Googlemaps aufbauen','Fehler')
+            if language=="fr-FR":
+                self.say(u"Je ne peux pas établir de connexion à Googlemaps",'Erreur')
+            else:
+                self.say('Could not establish a conenction to Googlemaps','Error');
         self.complete_request()
 
     @register("de-DE", "(Wo liegt.*)")    
