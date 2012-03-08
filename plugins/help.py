@@ -29,7 +29,7 @@ with open(config_file, "r") as fh:
                         tline_answer_en = tline_answer_en +'\n' + "".join(tline)
                         
                     elif tline.startswith("@register(\"zh-CN\", "):
-                        tline = tline.replace('@register','').replace('(','').replace(')','').replace('\"','').replace('.*','…').replace('zh-CN, ','').replace('[a-zA-Z0-9]+','').replace('\w','').replace('|','/').replace('u','').replace("res['setAlarm']['zh-CN']",'…闹钟…设在/设置?点?分/分钟名为/叫做…')
+                        tline = tline.replace('@register','').replace('(','').replace(')','').replace('\"','').replace('.*','…').replace('zh-CN, ','').replace('[a-zA-Z0-9]+','').replace('\w','').replace('|','/').replace('u','').replace("res['setAlarm']['zh-CN']",'…闹钟定在/订在/设置/设为…点整/点钟/点/小时(…分/分钟)(叫做…)')
                         tline_answer_zh = tline_answer_zh +'\n' + "".join(tline)
         
         except:
