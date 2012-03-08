@@ -39,7 +39,7 @@ class alarmPlugin(Plugin):
     res = {
         'setAlarm': {
             'en-US': '.*set.* alarm for.* (0?[1-9]|1[012])([0-5]\d)?\s?([APap][mM])\s?(\bcalled|named|labeled\b)?\s?(([a-z0-9]{1,7}\s)?([a-z0-9]{1,7})\s?([a-z0-9]{1,7}))?',
-            'zh-CN': '.*闹钟.*(定在|订在|设置|设为)\s*([\w ]+)\s*(点整|点钟|点|小时)+\s*(([\w ]+)分)?钟?\s*(叫做([\w ]+))?',
+            'zh-CN': u'.*闹钟.*(定在|订在|设置|设为)\s*([\w ]+)\s*(点整|点钟|点|小时)+\s*(([\w ]+)分)?钟?\s*(叫做([\w ]+))?',
             'fr-FR': u'.*(programme|regle|règle|met|mai).*(alarme|reveil|réveil)([^0-9]+)([0-2]?[0-9])([^0-9]+)?([0-5]?[0-9])?\s?(\appelée|appel|nommée|nommee|labellé|labelle\b)?\s?(([a-z0-9]{1,7}\s)?([a-z0-9]{1,7})\s?([a-z0-9]{1,7}))?'
         }
     }
