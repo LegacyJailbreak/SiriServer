@@ -20,7 +20,7 @@ googleplaces_api_key = APIKeyForAPI("google")
  
 class googlePlacesSearch(Plugin):
      @register("en-US", "(find|show|where).* (nearest|nearby|closest) (.*)")
-     @register("zh-CN", u"(找|告诉我|哪里).*(近的|近|旁边|周围|周围的)(.*)")
+     @register("zh-CN", u"(找|告诉我|哪里|离我).*(近的|近|旁边的|旁边|周围的|周围)(.*)")
      @register("en-GB", "(find|show|where).* (nearest|nearby|closest) (.*)")
      def googleplaces_search(self, speech, language, regex):
           if language == "zh-CN":
