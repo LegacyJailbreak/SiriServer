@@ -47,18 +47,23 @@ class Create(ClientBoundCommand):
 
 class note(Plugin):
     localizations = {"noteDefaults": 
-                        {"searching":{"en-US": "Creating your note ...","fr-FR": u"Création de votre note..."}, 
-                         "result": {"en-US": "Here is your note:","fr-FR": "Voici votre note :"},
-                         "nothing": {"en-US": "What should I note?","fr-FR": "Que dois-je noter ?"}}, 
+                        {"searching":{"en-US": "Creating your note ...","fr-FR": u"Création de votre note...","zh-CN": u"正在创建备忘录..."}, 
+                         "result": {"en-US": "Here is your note:","fr-FR": "Voici votre note :","zh-CN": u"这是您的备忘录："},
+                         "nothing": {"en-US": "What should I note?","fr-FR": "Que dois-je noter ?","zh-CN": u"我要记录什么？"}}, 
                     "failure": {
                                 "en-US": "I cannot type your note right now.",
+                                "zh-CN": u"我无法输入您的备忘录。",
                                 "fr-FR": "Je ne peux pas écrire votre note maintenant."
                                 }
                     }
     @register("en-US", "(.*note [a-zA-Z0-9]+)|(.*create.*note [a-zA-Z0-9]+)|(.*write.*note [a-zA-Z0-9]+)")
     @register("fr-FR", u"(.*créer une note [a-zA-Z0-9]+)|(.*note [a-zA-Z0-9]+)")
+    @register("zh-CN", u"(.*备忘.*)|(.*记录.*)")
     def writeNote(self, speech, language):
-        content_raw = re.match(".*note ([a-zA-Z0-9, ]+)$", speech, re.IGNORECASE)
+        if language == "zh-CN":
+            content_raw = re.match(u"(?u).*备忘([\w ]+)|(?u).*记录([\w ]+)", speech, re.IGNORECASE)
+        else:
+            content_raw = re.match(".*note ([a-zA-Z0-9, ]+)$", speech, re.IGNORECASE)
         if content_raw == None:
             view_initial = AddViews(self.refId, dialogPhase="Reflection")
             view_initial.views = [AssistantUtteranceView(text=note.localizations['noteDefaults']['nothing'][language], speakableText=note.localizations['noteDefaults']['nothing'][language], dialogIdentifier="Note#failed")]

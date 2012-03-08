@@ -10,13 +10,18 @@ class talkToMe(Plugin):
         
     @register("de-DE", ".*status.*")
     @register("en-US", ".*status.*")
+    @register("zh-CN", u".*状态.*")
     def ttm_uptime_status(self, speech, language):
         uptime = os.popen("uptime").read()
         freemem = os.popen("grep MemFree /proc/meminfo").read()
         if language == 'de-DE':
             self.say('Hier ist der Status:')
             self.say(uptime, ' ')
-            self.say(freemem, ' ') 
+            self.say(freemem, ' ')
+        elif language == 'zh-CN':
+            self.say(u'服务器状态：')
+            self.say(uptime, u'这是运行时间。')
+            self.say(freemem, u'这是剩余内存。')
         else:
             self.say('Here is the status:')
             self.say(uptime, 'This is running time.')

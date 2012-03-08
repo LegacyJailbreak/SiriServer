@@ -27,4 +27,5 @@ class AsyncOpenHttp(threading.Thread):
             self.successCallback(content, self.requestId, self.dictation)
         except:
             self.finished = True
+            print "Error with google voice api!"
             self.errorCallback(self.requestId, self.dictation)

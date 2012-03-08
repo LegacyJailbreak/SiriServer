@@ -18,6 +18,7 @@ class location(Plugin):
 
     @register("de-DE", "(Wo bin ich.*)")    
     @register("en-US", "(Where am I.*)|(What is my location.*)")
+    @register("zh-CN", u"(我在哪.*)|(我的位置.*)")
     @register("fr-FR", u'(Où suis-je.*)')
     def whereAmI(self, speech, language):
         mapGetLocation = self.getCurrentLocation()
@@ -48,6 +49,9 @@ class location(Plugin):
                     the_header="Dein Standort"
                 elif language == 'fr-FR':
                     the_header="Votre position"
+                elif language == 'zh-CN':
+                    self.say(u"这是您的位置 {0}：".format(self.user_name()))
+                    the_header=u"您的位置"
                 else:
                     self.say(u"This is your location {0}".format(self.user_name()))
                     the_header="Your location"
@@ -60,6 +64,8 @@ class location(Plugin):
                     self.say('Die Googlemaps informationen waren ungenügend!','Fehler')
                 elif language == 'fr-FR':
                     self.say(u"La réponse de Googlemaps ne contient pas l'information nécessaire",'Erreur')
+                elif language == 'zh-CN':
+                    self.say(u"我无法在谷歌地图上找到所需信息。",u'错误')
                 else:
                     self.say('The Googlemaps response did not hold the information i need!','Error')
         else:
@@ -67,12 +73,15 @@ class location(Plugin):
                 self.say('Ich konnte keine Verbindung zu Googlemaps aufbauen','Fehler')
             if language=="fr-FR":
                 self.say(u"Je ne peux pas établir de connexion à Googlemaps",'Erreur')
+            if language=="zh-CN":
+                self.say(u"我无法访问谷歌地图。", u'错误')
             else:
                 self.say('Could not establish a conenction to Googlemaps','Error');
         self.complete_request()
 
     @register("de-DE", "(Wo liegt.*)")    
     @register("en-US", "(Where is.*)")
+    @register("zh-CN", u"(.*在哪.*)")
     @register("fr-FR", u".*o(ù|u) (est |se trouve |ce trouve |se situe |ce situe )(.*)")
     def whereIs(self, speech, language, regex):
         the_location = None
@@ -81,6 +90,9 @@ class location(Plugin):
             the_location = the_location.group(1).strip()
         elif language == 'fr-FR':
             the_location = regex.group(regex.lastindex).strip()
+        elif language == 'zh-CN':
+            the_location = re.match(u"(?u)([\w ]+)在哪.*", speech, re.IGNORECASE)
+            the_location = the_location.group(1).strip()
         else:
             the_location = re.match("(?u).* is ([\w ]+)$", speech, re.IGNORECASE)
             the_location = the_location.group(1).strip()
@@ -93,6 +105,8 @@ class location(Plugin):
                 self.say('Ich habe keinen Ort gefunden!',None)
             elif language == 'fr-FR':
                 self.say(u"Désolé, je n'arrive pas à trouver cet endroit !")
+            elif language == 'zh-CN':
+                self.say(u"未找到位置。")
             else:
                 self.say('No location found!',None)
             self.complete_request() 
@@ -118,6 +132,9 @@ class location(Plugin):
                     the_header=u"Hier liegt {0}".format(the_location)
                 elif language =="fr-FR":
                     the_header=u"Voici l'emplacement de {0} :".format(the_location)
+                elif language =="zh-CN":
+                    self.say(u"{0}在这里：".format(the_location))
+                    the_header=u"{0}在这里：".format(the_location)
                 else:
                     the_header=u"Here is {0}".format(the_location)
                 view = AddViews(self.refId, dialogPhase="Completion")
@@ -130,6 +147,8 @@ class location(Plugin):
                     self.say('Die Googlemaps informationen waren ungenügend!','Fehler')
                 elif language == "fr-FR":
                     self.say(u"Les informations demandées ne sont pas sur Google Maps !", u'Erreur')
+                elif language == 'zh-CN':
+                    self.say(u"我无法在谷歌地图上找到所需信息。",u'错误')
                 else:
                     self.say('The Googlemaps response did not hold the information i need!','Error')
         else:
@@ -137,6 +156,8 @@ class location(Plugin):
                 self.say('Ich konnte keine Verbindung zu Googlemaps aufbauen','Fehler')
             elif language == 'fr-FR':
                 self.say(u"Je n'arrive pas à joindre Google Maps.", 'Erreur')
+            elif language=="zh-CN":
+                self.say(u"我无法访问谷歌地图。", u'错误')
             else:
                 self.say('Could not establish a conenction to Google Maps.','Error');
         self.complete_request()        

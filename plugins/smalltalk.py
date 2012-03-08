@@ -189,11 +189,14 @@ class smalltalk(Plugin):
     @register("de-DE", "(.*Hallo.*)|(.*Hi.*Siri.*)|(Hi)|(Hey)")
     @register("en-US", "(.*Hello.*)|(.*Hi.*Siri.*)|(Hi)|(Hey)")
     @register("fr-FR", ".*(Bonjour|Coucou|Salut)( Siri)?.*")
+    @register("zh-CN", u"(.*你好.*)|(.*嗨.*Siri.*)|(嗨)|(嘿)|(喂)")
     def st_hello(self, speech, language):
         if language == 'de-DE':
             self.say(u"Hallo {0}!".format(self.user_name()))
         elif language == 'fr-FR':
             self.say(u"Bonjour {0}!".format(self.user_name()));
+        elif language == 'zh-CN':
+            self.say(u"您好{0}，我是厌烦羊的 Siri 服务！".format(self.user_name()));
         else:
             self.say(u"Greetings {0}, I am Siri service from Linus Yang!".format(self.user_name()))
         self.complete_request()
@@ -678,4 +681,3 @@ class smalltalk(Plugin):
             self.say(u"J'aurais voulu être un artiste...")
             self.say(u"Désolé, je devrais payer des royalties si j'en dis plus.")
         self.complete_request()
-     

@@ -20,9 +20,13 @@ googleplaces_api_key = APIKeyForAPI("google")
  
 class googlePlacesSearch(Plugin):
      @register("en-US", "(find|show|where).* (nearest|nearby|closest) (.*)")
+     @register("zh-CN", u"(找|告诉我|哪里|离我).*(近的|近|旁边的|旁边|周围的|周围)(.*)")
      @register("en-GB", "(find|show|where).* (nearest|nearby|closest) (.*)")
      def googleplaces_search(self, speech, language, regex):
-          self.say('Searching...',' ')
+          if language == "zh-CN":
+              self.say(u'正在检索...', ' ')
+          else:
+              self.say('Searching...',' ')
           mapGetLocation = self.getCurrentLocation()
           latitude= mapGetLocation.latitude
           longitude= mapGetLocation.longitude
@@ -55,10 +59,19 @@ class googlePlacesSearch(Plugin):
                     count_min = min(len(response['results']),random_results)
                     count_max = max(len(response['results']),random_results)
                     view = AddViews(self.refId, dialogPhase="Completion")
-                    view.views = [AssistantUtteranceView(speakableText='I found '+str(count_max)+' '+str(Title)+' results... '+str(count_min)+' of them are fairly close to you:', dialogIdentifier="googlePlacesMap"), mapsnippet]
+                    if language == "zh-CN":
+                        view.views = [AssistantUtteranceView(speakableText=u'我找到'+str(count_max)+u'个有关'+str(Title.encode("utf-8"))+u'的结果。其中有'+str(count_min)+u'个离您很近：', dialogIdentifier="googlePlacesMap"), mapsnippet]
+                    else:
+                        view.views = [AssistantUtteranceView(speakableText='I found '+str(count_max)+' '+str(Title)+' results... '+str(count_min)+' of them are fairly close to you:', dialogIdentifier="googlePlacesMap"), mapsnippet]
                     self.sendRequestWithoutAnswer(view)
                else:
-                    self.say("I'm sorry but I did not find any results for "+str(Title)+" near you!")
+                    if language == "zh-CN":
+                        self.say(u"抱歉，我找不到您附近有关"+str(Title.encode("utf-8"))+"的地点！")
+                    else:
+                        self.say("I'm sorry but I did not find any results for "+str(Title)+" near you!")
           else:
-               self.say("I'm sorry but I did not find any results for "+str(Title)+" near you!")
+              if language == "zh-CN":
+                  self.say(u"抱歉，我找不到您附近有关"+str(Title.encode("utf-8"))+"的地点！")
+              else:
+                  self.say("I'm sorry but I did not find any results for "+str(Title)+" near you!")
           self.complete_request()
