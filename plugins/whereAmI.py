@@ -91,7 +91,7 @@ class location(Plugin):
         elif language == 'fr-FR':
             the_location = regex.group(regex.lastindex).strip()
         elif language == 'zh-CN':
-            the_location = re.match(u"([\w ]+)在哪.*", speech, re.IGNORECASE)
+            the_location = re.match(u"(?u)([\w ]+)在哪.*", speech, re.IGNORECASE)
             the_location = the_location.group(1).strip()
         else:
             the_location = re.match("(?u).* is ([\w ]+)$", speech, re.IGNORECASE)
@@ -133,6 +133,7 @@ class location(Plugin):
                 elif language =="fr-FR":
                     the_header=u"Voici l'emplacement de {0} :".format(the_location)
                 elif language =="zh-CN":
+                    self.say(u"{0}在这里：".format(the_location))
                     the_header=u"{0}在这里：".format(the_location)
                 else:
                     the_header=u"Here is {0}".format(the_location)

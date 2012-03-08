@@ -9,7 +9,7 @@ pluginPath="plugins"
 from plugin import *
 tline_answer_de = ''
 tline_answer_en = ''
-tline_answer_zh = '可用命令：'
+tline_answer_zh = u'可用命令：'
 
 with open(config_file, "r") as fh:
     for line in fh:
