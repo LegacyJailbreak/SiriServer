@@ -111,7 +111,7 @@ class alarmPlugin(Plugin):
             labelGroupId = 7
             alarmHour = toNum(alarmString.group(2))
             alarm24Hour = alarmHour
-            alarmMinutes = toNum(alarmString.group(5))
+            alarmMinutes = str(toNum(alarmString.group(5)))
             alarmAMPM = ""
             alarmLabelExists = alarmString.group(labelGroupId)
         else:
