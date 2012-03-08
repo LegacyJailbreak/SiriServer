@@ -23,7 +23,7 @@ class definition(Plugin):
         print url
         definition = None
         try:
-            jsonString = urllib2.urlopen(url, timeout=3).read()
+            jsonString = urllib2.urlopen(url, timeout=10).read()
             jsonString = jsonString.replace(",200,null)","").replace("dict_api.callbacks.id100(","")
             jsonString = jsonString.replace('\\x3c','').replace('\\x3d','').replace('\\x3e','').replace('\\x22','').replace('\\x26','').replace("#39;","'")
             response = json.loads(jsonString)
