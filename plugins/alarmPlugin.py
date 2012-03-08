@@ -24,6 +24,10 @@ dict = {u'零':0, u'一':1, u'二':2, u'三':3, u'四':4, u'五':5, u'六':6, u'
 def toNum(a, encoding="utf-8"):
     if isinstance(a, str):
         a = a.decode(encoding)
+    if a == None:
+        return 0
+    else:
+        a, tmp = re.subn("[a-zA-Z ]", "", a)
     count = 0 
     result = 0
     tmp = 0
@@ -105,9 +109,9 @@ class alarmPlugin(Plugin):
             alarmLabelExists = alarmString.group(labelGroupId)
         elif language == 'zh-CN':
             labelGroupId = 7
-            alarmHour = toNum(alarmString.group(2).replace(" ",""))
+            alarmHour = toNum(alarmString.group(2))
             alarm24Hour = alarmHour
-            alarmMinutes = toNum(alarmString.group(5).replace(" ",""))
+            alarmMinutes = toNum(alarmString.group(5))
             alarmAMPM = ""
             alarmLabelExists = alarmString.group(labelGroupId)
         else:
