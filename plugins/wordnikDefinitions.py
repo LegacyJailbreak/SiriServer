@@ -26,7 +26,7 @@ w = Wordnik(api_key=wordnik_api_key)
 
 class define(Plugin):
     
-    @register("en-US", "define ([\w ]+)")
+    @register("en-US", "word define ([\w ]+)")
     def defineword(self, speech, language, regMatched):
         Question = regMatched.group(1)
         output = w.word_get_definitions(Question, limit=1)
