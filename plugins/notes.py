@@ -61,9 +61,10 @@ class note(Plugin):
     @register("zh-CN", u"(.*备忘[\w ]+)|(.*记录[\w ]+)")
     def writeNote(self, speech, language):
         if language == "zh-CN":
-            content_raw = re.match(".*备忘([\w ]+)|.*记录([\w ]+)", speech, re.IGNORECASE)
+            content_raw = re.match(".*备忘([\w ]+)$|.*记录([\w ]+)$", speech, re.IGNORECASE)
         else:
             content_raw = re.match(".*note ([a-zA-Z0-9, ]+)$", speech, re.IGNORECASE)
+        print content_raw
         if content_raw == None:
             view_initial = AddViews(self.refId, dialogPhase="Reflection")
             view_initial.views = [AssistantUtteranceView(text=note.localizations['noteDefaults']['nothing'][language], speakableText=note.localizations['noteDefaults']['nothing'][language], dialogIdentifier="Note#failed")]
