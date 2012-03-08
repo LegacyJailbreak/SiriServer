@@ -26,11 +26,11 @@ class alarmPlugin(Plugin):
                 "fr-FR": u"Réglage de l'alarme\u2026"
             }, "alarmWasSet": {
                 "en-US": "Your alarm is set for {0}:{1} {2}.",
-                "zh-CN": u"您的闹钟已设在 {0}:{1} {2}。",
+                "zh-CN": u"您的闹钟已设在{0}点{1}分{2}。",
                 "fr-FR": u"Votre alarme est programmée pour {0}:{1} {2}"
             }, "alarmSetWithLabel": {
                 "en-US": "Your alarm {0} {1} is set for {2}:{3} {4}.",
-                "zh-CN": u"您的闹钟 {0} {1} 已设在 {2}:{3} {4}。",
+                "zh-CN": u"您的闹钟“{0}”已设在{2}点{3}分{4}。",
                 "fr-FR": u"Votre alarme {0} {1} est programmée pour {2}:{3} {4}"
             }
         }
@@ -39,7 +39,7 @@ class alarmPlugin(Plugin):
     res = {
         'setAlarm': {
             'en-US': '.*set.* alarm for.* (0?[1-9]|1[012])([0-5]\d)?\s?([APap][mM])\s?(\bcalled|named|labeled\b)?\s?(([a-z0-9]{1,7}\s)?([a-z0-9]{1,7})\s?([a-z0-9]{1,7}))?',
-            'zh-CN': '.*闹钟设在.*(0?[1-9]|1[012])([0-5]\d)?\s?([APap][mM])\s?(\b名为\b)?\s?(([a-z0-9]{1,7}\s)?([a-z0-9]{1,7})\s?([a-z0-9]{1,7}))?',
+            'zh-CN': '.*(闹钟).*(设在)([^0-9]+)([0-2]?[0-9])([^0-9]+)?([0-5]?[0-9])?\s?[分|分钟]?\s?(名为|叫做)?\s?([\w]+)?',
             'fr-FR': u'.*(programme|regle|règle|met|mai).*(alarme|reveil|réveil)([^0-9]+)([0-2]?[0-9])([^0-9]+)?([0-5]?[0-9])?\s?(\appelée|appel|nommée|nommee|labellé|labelle\b)?\s?(([a-z0-9]{1,7}\s)?([a-z0-9]{1,7})\s?([a-z0-9]{1,7}))?'
         }
     }
@@ -51,6 +51,13 @@ class alarmPlugin(Plugin):
         alarmString = re.match(alarmPlugin.res['setAlarm'][language], speech, re.IGNORECASE)
 
         if language == 'fr-FR':
+            labelGroupId = 8
+            alarmHour = int(alarmString.group(4))
+            alarm24Hour = alarmHour
+            alarmMinutes = alarmString.group(6)
+            alarmAMPM = ""
+            alarmLabelExists = alarmString.group(labelGroupId)
+        elif language == 'zh-CN':
             labelGroupId = 8
             alarmHour = int(alarmString.group(4))
             alarm24Hour = alarmHour

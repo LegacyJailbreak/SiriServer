@@ -9,7 +9,7 @@ pluginPath="plugins"
 from plugin import *
 tline_answer_de = ''
 tline_answer_en = ''
-tline_answer_zh = ''
+tline_answer_zh = '可用命令：'
 
 with open(config_file, "r") as fh:
     for line in fh:
@@ -29,7 +29,7 @@ with open(config_file, "r") as fh:
                         tline_answer_en = tline_answer_en +'\n' + "".join(tline)
                         
                     elif tline.startswith("@register(\"zh-CN\", "):
-                        tline = tline.replace('@register','').replace('(','').replace(')','').replace('\"','').replace('.','').replace('zh-CN, ','').replace('[a-zA-Z0-9]+','').replace('\w','').replace('|',' or  ')
+                        tline = tline.replace('@register','').replace('(','').replace(')','').replace('\"','').replace('.*','…').replace('zh-CN, ','').replace('[a-zA-Z0-9]+','').replace('\w','').replace('|','/').replace('u','').replace("res['setAlarm']['zh-CN']",'…闹钟…设在?点?分/分钟名为/叫做…')
                         tline_answer_zh = tline_answer_zh +'\n' + "".join(tline)
         
         except:
@@ -46,7 +46,7 @@ class help(Plugin):
             self.say("".join(tline_answer_de ),' ')
         elif language == 'zh-CN':
             self.say(u"当前语言的可用命令如下：")
-            self.say(str(tline_answer_zh.encode("utf-8")),' ')
+            self.say(tline_answer_zh,' ')
         else:
             self.say("Here are the command which are possible in your language:")
             self.say(tline_answer_en ,' ')
