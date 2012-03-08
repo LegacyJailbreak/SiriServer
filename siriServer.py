@@ -350,13 +350,16 @@ class HandleConnection(ssl_dispatcher):
                         objProperties = reqObject['properties'] 
                         self.assistant.censorSpeech = objProperties['censorSpeech']
                         self.assistant.timeZoneId = objProperties['timeZoneId']
-                        self.assistant.language = objProperties['language']                     
+                        self.assistant.language = objProperties['language']
+                        #chinese test here
+                        if self.assistant.language=='en-AU':
+                            self.assistant.language='zh-CN'           
                         #fix if there is no language or a bug in siri, spire
-                        
                         if self.assistant.language=='':
                             self.assistant.language='en-US'
                         if self.lang != None:
                             self.assistant.language = self.lang
+                        print self.assistant.language
                         self.assistant.region = objProperties['region']
                         #Record the user firstName and nickName                    
                         try:                        
