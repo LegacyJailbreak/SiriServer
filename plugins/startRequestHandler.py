@@ -22,13 +22,12 @@ class startRequestHandler(Plugin):
     @register("en-AU", u"\^webSearchQuery\^=\^([a-z, ]+)\^\^webSearchConfirmation\^=\^([a-z]+)\^")
     @register("en-GB", u"\^webSearchQuery\^=\^([a-z, ]+)\^\^webSearchConfirmation\^=\^([a-z]+)\^")
     @register("fr-FR", u"\^webSearchQuery\^=\^([a-z, ]+)\^\^webSearchConfirmation\^=\^([a-z]+)\^")
-    @register("zh-CN", u"(?u)\^webSearchQuery\^=\^([\w ]+)\^\^webSearchConfirmation\^=\^([a-z]+)\^")
+    @register("zh-CN", u"(?u)\^webSearchQuery\^=\^([\w ]+)\^\^webSearchConfirmation\^=\^([\w]+)\^")
     def webSearchConfirmation(self, speech, language):
-        # lets use a little hack to get that regex
-        matcher = self.webSearchConfirmation.__dict__[__criteria_key__]['de-DE']
-        regMatched = matcher.match(speech)
-        webSearchQuery = regMatched.group(1)
-        webSearchConfirmation = regMatched.group(2)
+        regMatched = re.match(u"(?u)\^webSearchQuery\^=\^([\w ]+)\^\^webSearchConfirmation\^=\^([\w]+)\^", speech, re.IGNORECASE)
+        if regMatched != None:
+            webSearchQuery = regMatched.group(1)
+            webSearchConfirmation = regMatched.group(2)
         
         lang = language.split("-")[0]
 
