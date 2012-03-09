@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #displaypicture.py
 
 #Google Image Plugin v0.2

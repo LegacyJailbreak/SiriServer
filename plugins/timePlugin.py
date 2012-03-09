@@ -23,7 +23,7 @@ class timePlugin(Plugin):
                         {"search":{"de-DE": "Es wird gesucht ...", "en-US": "Looking up ...", "fr-FR": "Je cherche ...", "en-US": "正在查找…"}, 
                          "currentTimeIn": 
                                 {
-                                "tts": {"de-DE": u"Die Uhrzeit in {0},{1} ist @{{fn#currentTimeIn#{2}}}:", "en-US": "The time in {0},{1} is @{{fn#currentTimeIn#{2}}}:", "fr-FR": u"Il est  @{{fn#currentTimeIn#{2}}} à {0}, {1}", "zh-CN": u"在 {0}，{1} 的时间是 @{{fn#currentTimeIn#{2}}}},
+                                "tts": {"de-DE": u"Die Uhrzeit in {0},{1} ist @{{fn#currentTimeIn#{2}}}:", "en-US": "The time in {0},{1} is @{{fn#currentTimeIn#{2}}}:", "fr-FR": u"Il est  @{{fn#currentTimeIn#{2}}} à {0}, {1}", "zh-CN": u"在 {0}，{1} 的时间是 @{{fn#currentTimeIn#{2}}}"},
                                 "text": {"de-DE": u"Die Uhrzeit in {0}, {1} ist @{{fn#currentTimeIn#{2}}}:", "en-US": "The time in {0}, {1} is @{{fn#currentTimeIn#{2}}}:", "fr-FR": u"Il est  @{{fn#currentTimeIn#{2}}} à {0}, {1}", "zh-CN": u"在 {0}，{1} 的时间是 @{{fn#currentTimeIn#{2}}}"}
                                 }
                         },

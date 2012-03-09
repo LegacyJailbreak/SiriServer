@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 #nurf-imdb.py
 
 #Simplified Chinese localization: Linus Yang <laokongzi@gmail.com>
