@@ -10,6 +10,7 @@
 #(or anything else you want a picture of)
 
 # Must be before wwwsearch plugin
+#Simplified Chinese localization: Linus Yang <laokongzi@gmail.com>
 
 import re
 import urllib2, urllib
@@ -25,13 +26,20 @@ class define(Plugin):
     
     @register("de-DE", "(zeig mir|zeige|zeig).*(bild|zeichnung) (vo. ein..|vo.|aus)* ([\w ]+)")
     @register("en-US", "(display|show me|show).*(picture|image|drawing|illustration) (of|an|a)* ([\w ]+)")
+    @register("zh-CN", u"(显示|给我看)(关于|有关)?([\w ]+)(的图).*")
     @register("fr-FR", u"(montre|affiche|recherche|cherche|dessine)?.*(photos?|images?|dessins?|illustrations?) (une?|pour|de la|de l'|des|du|de|d'une?|d'|l')* ?([\w ]+)")
     def displaypicture(self, speech, language, regex):
-        Title = regex.group(regex.lastindex).strip()
+        if language == "zh-CN":
+            Title = regex.group(3).strip()
+        else:
+            Title = regex.group(regex.lastindex).strip()
         Query = urllib.quote_plus(Title.encode("utf-8"))
         SearchURL = u'https://ajax.googleapis.com/ajax/services/search/images?v=1.0&imgsz=small|medium|large|xlarge&q=' + str(Query)
         try:
-    	    self.say("Here is the image for "+Title+"...")
+            if language == "zh-CN":
+                self.say(u"这是有关"+str(Title.encode("utf-8"))+"的图片：")
+            else:
+                self.say("Here is the image for "+Title+"...")
             jsonResponse = urllib2.urlopen(SearchURL).read()
             jsonDecoded = json.JSONDecoder().decode(jsonResponse)
             ImageURL = jsonDecoded['responseData']['results'][0]['unescapedUrl']
@@ -42,5 +50,8 @@ class define(Plugin):
             self.sendRequestWithoutAnswer(view)
             self.complete_request()
         except (urllib2.URLError):
-            self.say("Sorry, a connection to Google Images could not be established.")
+            if language == "zh-CN":
+                self.say(u"抱歉，我无法连接谷歌图片服务。")
+            else:
+                self.say("Sorry, a connection to Google Images could not be established.")
             self.complete_request()

@@ -5,6 +5,7 @@
 #will add list response support for "unfound" search strings, since wikipedia-api is case sensivity only, it's not implented yet..
 #at least it's prepared for..
 #btw, can't modify wikipedias language since WebSearch (class) decides that on it's own..
+#Simplified Chinese localization: Linus Yang <laokongzi@gmail.com>
 
 import re
 import urllib2, urllib
@@ -22,6 +23,7 @@ class wikiPedia(Plugin):
     
     @register("de-DE", ".*suche.*wikipedia (.*)")    
     @register("en-US", "wikipedia (.*)")
+    @register("zh-CN", u"维基(搜索)?(.*)")
     @register("fr-FR", u".*cherche (.*) sur wikipedia|.*cherche (.*) sur wiki|.*(wikipedia|wiki) (.*)")
     def askWiki(self, speech, language, regex):
         wikiLanguage=language[0:2]
@@ -41,6 +43,8 @@ class wikiPedia(Plugin):
                     self.say(u"Nach \"{0}\" suchen...".format(title), None)
                 elif language=="fr-FR":
                     self.say(u"Recherche de \"{0}\"...".format(title), None)
+                elif language=="zh-CN":
+                    self.say(u"正在搜索“{0}”…".format(title), None)
                 else:
                     self.say(u"Searching for \"{0}\"...".format(title), None)
                 wikiSearch = WebSearch(refId=self.refId,query=searchString,provider="Wikipedia")
@@ -52,6 +56,8 @@ class wikiPedia(Plugin):
                     self.say('Ich habe nichts zu \"{0}\" auf Wikipedia gefunden'.format(searchString))
                 elif language=="fr-FR":
                     self.say(u'Je n\'ai rien trouvé sur Wikipedia pour \"{0}\"'.format(searchString))
+                elif language=="zh-CN":
+                    self.say(u"在维基百科上未找到“{0}”。".format(searchString))
                 else:
                     self.say("Nothing found for \"{0}\" on Wikipedia".format(searchString))
         else:
@@ -59,6 +65,8 @@ class wikiPedia(Plugin):
                     self.say('Ich konnte keine Verbindung zu Wikipedia aufbauen.')
                 elif language=="fr-FR":
                     self.say(u'Je n\'arrive pas à me connecter à Wikipedia.')
+                elif language=="zh-CN":
+                    self.say(u'无法连接维基百科。')
                 else:
                     self.say("Couldn't establish connection to Wikipedia")
         self.complete_request()

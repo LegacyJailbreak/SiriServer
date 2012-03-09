@@ -1,5 +1,6 @@
 #!/usr/bin/python                                                                                                                                                                   
 # -*- coding: utf-8 -*-                                                                                                                                                             
+#Simplified Chinese localization: Linus Yang <laokongzi@gmail.com>
 
 from plugin import *
 from siriObjects.websearchObjects import WebSearch
@@ -7,6 +8,7 @@ from siriObjects.websearchObjects import WebSearch
 class wwwSearch(Plugin):
     @register("de-DE", "(websuche.*)|(web suche.*)|(internetsuche.*)|(internet suche.*)|(web.*)|(internet.*)")
     @register("en-US", "(web search.*)|(web.*)|(internet.*)|(internet search.*)|(google.*)")
+    @register("zh-CN", u".*(搜索|google|谷歌)([\w ]+)")
     @register("fr-FR", u".*(recherche web de|rechercher? sur internet|chercher? sur internet|recherche de|rechercher?|chercher?|google|trouver?)(.*)(?!wiki(pedia)?)$")
     def webSearch(self, speech, language, regex):
         if (language == "en-US"):
@@ -21,6 +23,10 @@ class wwwSearch(Plugin):
             speech = speech.strip()
             if speech == "":
                 speech = self.ask("What is your query?")
+        elif(language == 'zh-CN'):
+            speech = regex.group(regex.lastindex).strip()
+            if(speech == ""):
+                speech = self.ask(u"您想让我搜索什么？")
         elif(language == 'fr-FR'):
             speech = regex.group(regex.lastindex).strip()
             if(speech == ""):

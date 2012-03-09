@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # by Alex 'apexad' Martin
 # help from: muhkuh0815 & gaVRos
+#Simplified Chinese localization: Linus Yang <laokongzi@gmail.com>
 
 import re
 import urllib2, urllib

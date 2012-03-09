@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Based on the WhereAmI plugins
+#Simplified Chinese localization: Linus Yang <laokongzi@gmail.com>
 
 import re
 import urllib2, urllib
@@ -81,7 +82,7 @@ class location(Plugin):
 
     @register("de-DE", "(Wo liegt.*)")    
     @register("en-US", "(Where is.*)")
-    @register("zh-CN", u"(.*在哪.*)")
+    @register("zh-CN", u"(.*[^你]在哪.*)")
     @register("fr-FR", u".*o(ù|u) (est |se trouve |ce trouve |se situe |ce situe )(.*)")
     def whereIs(self, speech, language, regex):
         the_location = None
@@ -134,7 +135,7 @@ class location(Plugin):
                     the_header=u"Voici l'emplacement de {0} :".format(the_location)
                 elif language =="zh-CN":
                     self.say(u"{0}在这里：".format(the_location))
-                    the_header=u"{0}在这里：".format(the_location)
+                    the_header=u"{0}".format(the_location)
                 else:
                     the_header=u"Here is {0}".format(the_location)
                 view = AddViews(self.refId, dialogPhase="Completion")

@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #Author: Sebastian Koch
+#Simplified Chinese localization: Linus Yang <laokongzi@gmail.com>
+
 import re
 import urllib2, urllib, uuid
 import json
@@ -44,25 +46,25 @@ class SiriWeatherFunctions():
 class weatherPlugin(Plugin):
     localizations = {"weatherForecast": 
                         {"search":{
-                            0:{"de-DE": u"Einen Moment Geduld bitte...", "en-US": "Checking my sources...", "fr-FR": u"Je vérifie mes sources..."},
-                            1:{"de-DE": u"Ich suche nach der Vorhersage ...", "en-US": "Please wait while I check that...", "fr-FR": "Je regarde..."},
-                            2:{"de-DE": u"Einen Moment bitte ...", "en-US": "One moment please...", "fr-FR":"Un instant..."},
-                            3:{"de-DE": u"Ich suche nach Wetterdaten...", "en-US": "Trying to get weather data for this location...","fr-FR": u"Je récupère la météo de cet endroit..."},
+                            0:{"de-DE": u"Einen Moment Geduld bitte...", "en-US": "Checking my sources...", "fr-FR": u"Je vérifie mes sources...", "zh-CN": u"正在检查来源…"},
+                            1:{"de-DE": u"Ich suche nach der Vorhersage ...", "en-US": "Please wait while I check that...", "fr-FR": "Je regarde...", "zh-CN": u"请稍等，正在查询…"},
+                            2:{"de-DE": u"Einen Moment bitte ...", "en-US": "One moment please...", "fr-FR":"Un instant...", "zh-CN": u"请稍后…"},
+                            3:{"de-DE": u"Ich suche nach Wetterdaten...", "en-US": "Trying to get weather data for this location..." ,"fr-FR": u"Je récupère la météo de cet endroit..." ,"zh-CN": u"正在获取当地天气信息…"},
                             }, 
                         "forecast":{
                             "DAILY": {
-                                0:{"de-DE": u"Hier ist die Vorhersage für {0}, {1}", "en-US": u"Here is the forecast for {0}, {1}", "fr-FR": u"Voici les prévisions pour {0}, {1}"},
-                                1:{"de-DE": u"Hier ist die Wetterprognose für {0}, {1}", "en-US": u"This is the forecast for {0}, {1}", "fr-FR": u"Voilà les prévisions pour {0}, {1}"},
-                                2:{"de-DE": u"Ich habe folgende Vorhersage für {0}, {1} gefunden", "en-US": u"I found the following forecast for {0}, {1}", "fr-FR": u"J'ai trouvé les prévisions suivantes pour {0}, {1}."},
+                                0:{"de-DE": u"Hier ist die Vorhersage für {0}, {1}", "en-US": u"Here is the forecast for {0}, {1}", "fr-FR": u"Voici les prévisions pour {0}, {1}", "zh-CN": u"这是 {0}，{1} 的天气预报"},
+                                1:{"de-DE": u"Hier ist die Wetterprognose für {0}, {1}", "en-US": u"This is the forecast for {0}, {1}", "fr-FR": u"Voilà les prévisions pour {0}, {1}", "zh-CN": u"这是 {0}，{1} 的天气预报"},
+                                2:{"de-DE": u"Ich habe folgende Vorhersage für {0}, {1} gefunden", "en-US": u"I found the following forecast for {0}, {1}", "fr-FR": u"J'ai trouvé les prévisions suivantes pour {0}, {1}.", "zh-CN": u"我找到了 {0}，{1} 的天气预报"},
                                 },
                             "HOURLY": {
-                                0:{"de-DE": u"Hier ist die heutige Vorhersage für {0}, {1}", "en-US": u"Here is today's forecast for {0}, {1}","fr-FR": u"Voici les prévisions d'aujourd'hui pour {0}, {1}."},
-                                1:{"de-DE": u"Hier ist die Wetterprognose von heute für {0}, {1}", "en-US": u"This is today's forecast for {0}, {1}", "fr-FR": u"Voici les prévisions d'aujourd'hui pour {0}, {1}."},
-                                2:{"de-DE": u"Ich habe folgende Tagesprognose für {0}, {1} gefunden", "en-US": u"I found the following hourly forecast for {0}, {1}","fr-FR": u"J'ai trouvé les prévisions pour {0}, {1}."},
+                                0:{"de-DE": u"Hier ist die heutige Vorhersage für {0}, {1}", "en-US": u"Here is today's forecast for {0}, {1}","fr-FR": u"Voici les prévisions d'aujourd'hui pour {0}, {1}.", "zh-CN": u"这是今天 {0}，{1} 的天气预报"},
+                                1:{"de-DE": u"Hier ist die Wetterprognose von heute für {0}, {1}", "en-US": u"This is today's forecast for {0}, {1}", "fr-FR": u"Voici les prévisions d'aujourd'hui pour {0}, {1}.", "zh-CN": u"这是今天 {0}，{1} 的天气预报"},
+                                2:{"de-DE": u"Ich habe folgende Tagesprognose für {0}, {1} gefunden", "en-US": u"I found the following hourly forecast for {0}, {1}","fr-FR": u"J'ai trouvé les prévisions pour {0}, {1}.", "zh-CN": u"我找到了今天 {0}，{1} 的天气预报"},
                                 }
                         },
                         "failure": {
-                                   "de-DE": "Ich konnte leider keine Wettervorhersage finden!", "en-US": "I'm sorry but I could not find the forecast for this location!","fr-FR": u"Je suis désolé, je ne trouve pas cet endroit !"
+                                   "de-DE": "Ich konnte leider keine Wettervorhersage finden!", "en-US": "I'm sorry but I could not find the forecast for this location!","fr-FR": u"Je suis désolé, je ne trouve pas cet endroit !","zh-CN": u"抱歉，我没找到这个地点的天气预报。"
                                    }
                         }
                     }
@@ -70,6 +72,7 @@ class weatherPlugin(Plugin):
     @register("de-DE", "(.*Wetter.*)|(.*Vorhersage.*)")     
     @register("en-US", ".*(Weather|forecast|need.*umbrella|rain.*today|cold.*outside|hot.*outside|sunny.*outside.*).*")
     @register("fr-FR", u".*(Météo|prévision|Quel.*temps|(fais|fait|faire).*(chaud|froid)).*|j.*chaud.*|.*température.*")
+    @register("zh-CN", u".*(天气|冷|热|晴|雨|雪|伞).*")
     def weatherForecastLookUp(self, speech, language):
         speech = speech.replace(u".","")
         viewType ="DAILY"
@@ -101,6 +104,12 @@ class weatherPlugin(Plugin):
             speech = speech.replace(u"in den nächsten Stunden","")
             speech = speech.replace(u"für heute","")
         
+        if (speech.count(u"冷") > 0 or speech.count(u"热") > 0 or speech.count(u"晴") > 0 or speech.count(u"雨") > 0 or speech.count(u"雪") > 0 or speech.count(u"伞") > 0 or speech.count(u"当前") > 0 or speech.count(u"现在") > 0 or speech.count(u"最近") > 0) and language=="zh-CN":
+            viewType = "HOURLY"
+            speech = speech.replace(u"当前","")
+            speech = speech.replace(u"现在","") 
+            speech = speech.replace(u"最近","") 
+        
         if language=="en-US":
             speech = speech.replace(" for "," in ")
             
@@ -110,20 +119,17 @@ class weatherPlugin(Plugin):
             speech = speech.replace(u"in der nächsten Woche","")
             speech = speech.replace(u"nächste Woche","")
             speech = speech.replace(u" für "," in ")
-
-                
+     
         error = False
         view = AddViews(refId=self.refId, dialogPhase="Reflection")
         randomNumber = random.randint(0,3)
         view.views = [AssistantUtteranceView(weatherPlugin.localizations['weatherForecast']['search'][randomNumber][language], weatherPlugin.localizations['weatherForecast']['search'][randomNumber][language])]
         self.connection.send_object(view)
-        
-        
 
-        
-                
-        
-        countryOrCity = re.match(u"(?u).* (a|à|de|pour|dans|en|in) ([\w ]+)", speech, re.IGNORECASE)
+        if language == "zh-CN":
+            countryOrCity = re.match(u"(?u)(.*天)?([\w ]+[^的])?.*天气.*", speech, re.IGNORECASE)
+        else:
+            countryOrCity = re.match(u"(?u).* (a|à|de|pour|dans|en|in) ([\w ]+)", speech, re.IGNORECASE)
         if countryOrCity != None:
             countryOrCity = countryOrCity.group(countryOrCity.lastindex).strip()
             print "found forecast"

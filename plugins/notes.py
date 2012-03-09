@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+#Simplified Chinese localization: Linus Yang <laokongzi@gmail.com>
 
 import re
 import urllib2, urllib
@@ -61,7 +62,7 @@ class note(Plugin):
     @register("zh-CN", u"(.*备忘.*)|(.*记录.*)")
     def writeNote(self, speech, language):
         if language == "zh-CN":
-            content_raw = re.match(u"(?u).*备忘([\w ]+)|(?u).*记录([\w ]+)", speech, re.IGNORECASE)
+            content_raw = re.match(u"(?u).*(?:备忘|记录)([\w ]+)", speech, re.IGNORECASE)
         else:
             content_raw = re.match(".*note ([a-zA-Z0-9, ]+)$", speech, re.IGNORECASE)
         if content_raw == None:

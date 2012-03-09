@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+#Simplified Chinese localization: Linus Yang <laokongzi@gmail.com>
 
 from plugin import *
 
@@ -14,9 +15,9 @@ class examplePlugin(Plugin):
             answer = self.ask(u"Willst du das wirklich wissen?")
             self.say(u"Du hast \"{0}\" gesagt!".format(answer))
         elif language == 'en-US':
-            self.say("I shouldn't tell you!")
+            self.say("That's easy...it's a philosophical question concerning the purpose and significance of life or existence.")
         elif language == 'zh-CN':
-            self.say(u"这很难说。")
+            self.say(u"这很难说，或许哪位哲学家会知道吧。")
         self.complete_request()
 
     @register("de-DE", ".*standort.*test.*")

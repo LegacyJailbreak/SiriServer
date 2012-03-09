@@ -8,6 +8,7 @@
 #          set an alarm for HH AM/PM
 #          set an alarm for HH AM/PM <called/labeled/named> <[word 1] [word 2] [word 3]>
 #comments: feel free to email any comments/bug/updates
+#Simplified Chinese localization: Linus Yang <laokongzi@gmail.com>
 
 import re
 from fractions import Fraction
@@ -75,11 +76,11 @@ class alarmPlugin(Plugin):
                 "fr-FR": u"Réglage de l'alarme\u2026"
             }, "alarmWasSet": {
                 "en-US": "Your alarm is set for {0}:{1} {2}.",
-                "zh-CN": u"您的闹钟已设在{0}点{1}分{2}。",
+                "zh-CN": u"您的闹钟已设在 {0} 点 {1} 分{2}。",
                 "fr-FR": u"Votre alarme est programmée pour {0}:{1} {2}"
             }, "alarmSetWithLabel": {
                 "en-US": "Your alarm {0} {1} is set for {2}:{3} {4}.",
-                "zh-CN": u"您的闹钟“{0}”已设在{2}点{3}分{4}。",
+                "zh-CN": u"您的闹钟“{0}”已设在 {2} 点 {3} 分 {4}。",
                 "fr-FR": u"Votre alarme {0} {1} est programmée pour {2}:{3} {4}"
             }
         }
@@ -88,7 +89,7 @@ class alarmPlugin(Plugin):
     res = {
         'setAlarm': {
             'en-US': '.*set.* alarm for.* (0?[1-9]|1[012])([0-5]\d)?\s?([APap][mM])\s?(\bcalled|named|labeled\b)?\s?(([a-z0-9]{1,7}\s)?([a-z0-9]{1,7})\s?([a-z0-9]{1,7}))?',
-            'zh-CN': u'(?u).*闹钟.*(定在|订在|设置|设为)\s*([\w ]+)\s*(点整|点钟|点|小时)+\s*(([\w ]+)分)?钟?\s*(叫做([\w ]+))?',
+            'zh-CN': u'(?u).*闹钟.*(定在|订在|设置|设为)\s*([\w ]+)\s*(点整|点钟|点半|点|小时)+\s*(([\w ]+)分)?钟?\s*(叫做([\w ]+))?',
             'fr-FR': u'.*(programme|regle|règle|met|mai).*(alarme|reveil|réveil)([^0-9]+)([0-2]?[0-9])([^0-9]+)?([0-5]?[0-9])?\s?(\appelée|appel|nommée|nommee|labellé|labelle\b)?\s?(([a-z0-9]{1,7}\s)?([a-z0-9]{1,7})\s?([a-z0-9]{1,7}))?'
         }
     }
@@ -111,7 +112,10 @@ class alarmPlugin(Plugin):
             labelGroupId = 7
             alarmHour = toNum(alarmString.group(2))
             alarm24Hour = alarmHour
-            alarmMinutes = str(toNum(alarmString.group(5)))
+            if alarmString.group(3) == u'点半':
+                alarmMinutes = str(30)
+            else:
+                alarmMinutes = str(toNum(alarmString.group(5)))
             alarmAMPM = ""
             alarmLabelExists = alarmString.group(labelGroupId)
         else:

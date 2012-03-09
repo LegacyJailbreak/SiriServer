@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+#Simplified Chinese localization: Linus Yang <laokongzi@gmail.com>
 
 from plugin import *
 from siriObjects.baseObjects import ObjectIsCommand, RequestCompleted
@@ -14,74 +15,85 @@ responses = {
 'notFound': 
     {'de-DE': u"Entschuldigung, ich konnte niemanden in deinem Telefonbuch finden der so heißt",
      'en-US': u"Sorry, I did not find a match in your phone book",
+     'zh-CN': u"抱歉，我没有在通讯录中找到相关的项目。",
      'fr-FR': u"Désolé, je n'ai trouvé aucune correspondance dans votre carnet d'adresse."
     },
 'devel':
     {'de-DE': u"Entschuldigung, aber diese Funktion befindet sich noch in der Entwicklungsphase",
      'en-US': u"Sorry this feature is still under development",
+     'zh-CN': u"抱歉，此功能正在开发中。",
      'fr-FR': u"Désolé, cette fonctionnalité est encore en cours de développement."
     },
  'select':
     {'de-DE': u"Wen genau?", 
      'en-US': u"Which one?",
+     'zh-CN': u"哪一个？",
      'fr-FR': u"Lequel ?"
     },
 'selectNumber':
     {'de-DE': u"Welche Telefonnummer für {0}",
      'en-US': u"Which phone one for {0}",
+     'zh-CN': u"{0} 的哪个电话",
      'fr-FR': u"Quel numéro pour {0}"
     },
 'callPersonSpeak':
     {'de-DE': u"Rufe {0}, {1} an.",
      'en-US': u"Calling {0}, {1}.",
+     'zh-CN': u"正在呼叫 {0}，{1}。",
      'fr-FR': u"Appel de {0}, {1}."
     },
 'callPerson': 
     {'de-DE': u"Rufe {0}, {1} an: {2}",
      'en-US': u"Calling {0}, {1}: {2}",
+     'zh-CN': u"正在呼叫 {0}，{1}：{2}",
      'fr-FR': u"Appel de {0}, {1}: {2}"
     }
 }
 
 numberTypesLocalized= {
-'_$!<Mobile>!$_': {'en-US': u"mobile", 'de-DE': u"Handynummer", 'fr-FR': u"mobile"},
-'iPhone': {'en-US': u"iPhone", 'de-DE': u"iPhone-Nummer", 'fr-FR': u"iPhone"},
-'_$!<Home>!$_': {'en-US': u"home", 'de-DE': u"Privatnummer", 'fr-FR': u"domicile"},
-'_$!<Work>!$_': {'en-US': u"work", 'de-DE': u"Geschäftsnummer", 'fr-FR': u"bureau"},
-'_$!<Main>!$_': {'en-US': u"main", 'de-DE': u"Hauptnummer",'fr-FR': u"principal"},
-'_$!<HomeFAX>!$_': {'en-US': u"home fax", 'de-DE': u'private Faxnummer', 'fr-FR': u'fax domicile'},
-'_$!<WorkFAX>!$_': {'en-US': u"work fax", 'de-DE': u"geschäftliche Faxnummer", 'fr-FR': u"fax bureau"},
-'_$!<OtherFAX>!$_': {'en-US': u"_$!<OtherFAX>!$_", 'de-DE': u"_$!<OtherFAX>!$_", 'fr-FR': u"_$!<OtherFAX>!$_"},
-'_$!<Pager>!$_': {'en-US': u"pager", 'de-DE': u"Pagernummer", 'fr-FR': u"biper"},
-'_$!<Other>!$_':{'en-US': u"other phone", 'de-DE': u"anderes Telefon", 'fr-FR': u"autre"}
+'_$!<Mobile>!$_': {'en-US': u"mobile", 'de-DE': u"Handynummer", 'fr-FR': u"mobile", 'zh-CN': u"移动电话"},
+'iPhone': {'en-US': u"iPhone", 'de-DE': u"iPhone-Nummer", 'fr-FR': u"iPhone", 'zh-CN': u"iPhone"},
+'_$!<Home>!$_': {'en-US': u"home", 'de-DE': u"Privatnummer", 'fr-FR': u"domicile", 'zh-CN': u"住宅"},
+'_$!<Work>!$_': {'en-US': u"work", 'de-DE': u"Geschäftsnummer", 'fr-FR': u"bureau", 'zh-CN': u"工作"},
+'_$!<Main>!$_': {'en-US': u"main", 'de-DE': u"Hauptnummer",'fr-FR': u"principal",'zh-CN': u"主要"},
+'_$!<HomeFAX>!$_': {'en-US': u"home fax", 'de-DE': u'private Faxnummer', 'fr-FR': u'fax domicile', 'zh-CN': u'住宅传真'},
+'_$!<WorkFAX>!$_': {'en-US': u"work fax", 'de-DE': u"geschäftliche Faxnummer", 'fr-FR': u"fax bureau", 'zh-CN': u'工作传真'},
+'_$!<OtherFAX>!$_': {'en-US': u"_$!<OtherFAX>!$_", 'de-DE': u"_$!<OtherFAX>!$_", 'fr-FR': u"_$!<OtherFAX>!$_", 'zh-CN': u"_$!<OtherFAX>!$_"},
+'_$!<Pager>!$_': {'en-US': u"pager", 'de-DE': u"Pagernummer", 'fr-FR': u"biper", 'zh-CN': u"传呼"},
+'_$!<Other>!$_':{'en-US': u"other phone", 'de-DE': u"anderes Telefon", 'fr-FR': u"autre", 'zh-CN': u"其他"}
 }
 
 namesToNumberTypes = {
 'de-DE': {'mobile': "_$!<Mobile>!$_", 'handy': "_$!<Mobile>!$_", 'zuhause': "_$!<Home>!$_", 'privat': "_$!<Home>!$_", 'arbeit': "_$!<Work>!$_"},
 'fr-FR': {'mobile': "_$!<Mobile>!$_", 'gsm': "_$!<Mobile>!$_", 'portable': "_$!<Mobile>!$_", 'domicile': "_$!<Home>!$_", 'maison': "_$!<Home>!$_", 'travail': "_$!<Work>!$_", 'boulot': "_$!<Work>!$_"},
 'en-US': {'work': "_$!<Work>!$_",'home': "_$!<Home>!$_", 'mobile': "_$!<Mobile>!$_"}
+'zh-CN': {u'工作': "_$!<Work>!$_", u'家庭': "_$!<Home>!$_", u'住宅': "_$!<Home>!$_", u'移动': "_$!<Mobile>!$_", u'手机': "_$!<Mobile>!$_"}
 }
 
 speakableDemitter={
 'en-US': u", or ",
 'de-DE': u', oder ',
 'fr-FR': u', ou ',
+'zh-CN': u", 或 ",
 }
 
 errorNumberTypes= {
 'de-DE': u"Ich habe dich nicht verstanden, versuch es bitte noch einmal.",
 'en-US': u"Sorry, I did not understand, please try again.",
+'zh-CN': u"抱歉，我没听懂，请再说一遍。",
 'fr-FR': u"Désolé, je n'ai pas compris, veuillez réessayer."
 }
 
 errorNumberNotPresent= {
 'de-DE': u"Ich habe diese {0} von {1} nicht, aber eine andere.",
 'en-US': u"Sorry, I don't have a {0} number from {1}, but another.",
+'zh-CN': u"抱歉，我找不到 {0} 的号码来自 {1}，但找到另一个。",
 'fr-FR': u"Désolé, je n'ai pas un numéro de {0} pour {1}, mais un autre."
 }
 
 InterruptCall= {
     'en-US': u".*(stop|cancel|none).*",
+    'zh-CN': u".*(停止|取消|撤销).*",
     'de-DE': u".*(stop|cancel|none).*",
     'fr-FR': u".*(veu(t|x) plus|veu(x|t) plus|arr(ê|e)te|stop|annule|aucun|abandon).*"
 }
@@ -102,6 +114,19 @@ errorOnCallResponse={'en-US':
                        'code': 1203},
                       {'dialogIdentifier': u"PhoneCall#fatalResponse",
                        'text': u"Oh oh, I can't make your phone call.",
+                       'code': -1}],
+                     'zh-CN':
+                     [{'dialogIdentifier':u"PhoneCall#airplaneMode",
+                       'text': u"您的电话处于飞行模式。",
+                       'code': 1201},
+                      {'dialogIdentifier': u"PhoneCall#networkUnavailable",
+                       'text': u"信号有点差。请在信号好的地方重试。",
+                       'code': 1202},
+                      {'dialogIdentifier': u"PhoneCall#invalidNumber",
+                       'text': u"抱歉，我无法拨打这个号码。",
+                       'code': 1203},
+                      {'dialogIdentifier': u"PhoneCall#fatalResponse",
+                       'text': u"哦，我无法拨号。",
                        'code': -1}],
                      'de-DE':
                      [
@@ -253,6 +278,7 @@ class phonecallPlugin(Plugin):
     
     @register("de-DE", "ruf. (?P<name>[\w ]+).*(?P<type>arbeit|zuhause|privat|mobil|handy.*|iPhone.*|pager)? an")
     @register("en-US", "(make a )?call (to )?(?P<name>[\w ]+).*(?P<type>work|home|mobile|main|iPhone|pager)?")
+    @register("en-US", u".*(电话|拨号|打)给?(?P<name>[\w ]+).*标签为?(?P<type>工作|家庭|住宅|移动|手机)?")
     @register("fr-FR", u"(fai(s|t) un )?(appel|appelle|appeler?) (à )?(?P<name>[\w ]+).*(?P<type>travail|maison|mobile|gsm|iPhone|principal|biper)?")
     def makeCall(self, speech, language, regex):
         personToCall = regex.group('name')

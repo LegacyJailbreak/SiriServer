@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+#Simplified Chinese localization: Linus Yang <laokongzi@gmail.com>
+
 import os
 from datetime import date
 import locale 

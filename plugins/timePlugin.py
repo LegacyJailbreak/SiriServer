@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+#Simplified Chinese localization: Linus Yang <laokongzi@gmail.com>
 
 import re
 import urllib2, urllib
@@ -16,23 +17,24 @@ geonames_user="test2"
 class timePlugin(Plugin):
     
     localizations = {"currentTime": 
-                        {"search":{"de-DE": "Es wird gesucht ...", "en-US": "Looking up ...", "fr-FR": u"Je cherche ..."}, 
-                         "currentTime": {"de-DE": "Es ist @{fn#currentTime}", "en-US": "It is @{fn#currentTime}", "fr-FR": u"Il est @{fn#currentTime}"}}, 
+                        {"search":{"de-DE": "Es wird gesucht ...", "en-US": "Looking up ...", "fr-FR": u"Je cherche ...", "zh-CN": u"正在查找…"}, 
+                         "currentTime": {"de-DE": "Es ist @{fn#currentTime}", "en-US": "It is @{fn#currentTime}", "fr-FR": u"Il est @{fn#currentTime}", "zh-CN": u"现在是 @{fn#currentTime}"}}, 
                      "currentTimeIn": 
-                        {"search":{"de-DE": "Es wird gesucht ...", "en-US": "Looking up ...", "fr-FR": "Je cherche ..."}, 
+                        {"search":{"de-DE": "Es wird gesucht ...", "en-US": "Looking up ...", "fr-FR": "Je cherche ...", "en-US": "正在查找…"}, 
                          "currentTimeIn": 
                                 {
-                                "tts": {"de-DE": u"Die Uhrzeit in {0},{1} ist @{{fn#currentTimeIn#{2}}}:", "en-US": "The time in {0},{1} is @{{fn#currentTimeIn#{2}}}:", "fr-FR": u"Il est  @{{fn#currentTimeIn#{2}}} à {0}, {1}"},
-                                "text": {"de-DE": u"Die Uhrzeit in {0}, {1} ist @{{fn#currentTimeIn#{2}}}:", "en-US": "The time in {0}, {1} is @{{fn#currentTimeIn#{2}}}:", "fr-FR": u"Il est  @{{fn#currentTimeIn#{2}}} à {0}, {1}"}
+                                "tts": {"de-DE": u"Die Uhrzeit in {0},{1} ist @{{fn#currentTimeIn#{2}}}:", "en-US": "The time in {0},{1} is @{{fn#currentTimeIn#{2}}}:", "fr-FR": u"Il est  @{{fn#currentTimeIn#{2}}} à {0}, {1}", "zh-CN": u"在 {0}，{1} 的时间是 @{{fn#currentTimeIn#{2}}}},
+                                "text": {"de-DE": u"Die Uhrzeit in {0}, {1} ist @{{fn#currentTimeIn#{2}}}:", "en-US": "The time in {0}, {1} is @{{fn#currentTimeIn#{2}}}:", "fr-FR": u"Il est  @{{fn#currentTimeIn#{2}}} à {0}, {1}", "zh-CN": u"在 {0}，{1} 的时间是 @{{fn#currentTimeIn#{2}}}"}
                                 }
                         },
                     "failure": {
-                                "de-DE": "Ich kann dir die Uhr gerade nicht anzeigen!", "en-US": "I cannot show you the clock right now", "fr-FR": u"Désolé, j'ai perdu ma montre."
+                                "de-DE": "Ich kann dir die Uhr gerade nicht anzeigen!", "en-US": "I cannot show you the clock right now", "fr-FR": u"Désolé, j'ai perdu ma montre.", "zh-CN": u"我现在无法为您显示时间。"
                                 }
                     }
 
     @register("de-DE", "(Wie ?viel Uhr.*)|(.*Uhrzeit.*)")     
     @register("en-US", "(What.*time.*)|(.*current time.*)")
+    @register("zh-CN", u"(.*几点.*)|(.*时间.*)")
     @register("fr-FR", "(.*Quel.*heure.*)|(.*heure actuelle.*)")
     def currentTime(self, speech, language):
         #first tell that we look it up
@@ -52,6 +54,7 @@ class timePlugin(Plugin):
     
     @register("de-DE", "(Wieviel Uhr.*in ([\w ]+))|(Uhrzeit.*in ([\w ]+))")
     @register("en-US", "(What.*time.*in ([\w ]+))|(.*current time.*in ([\w ]+))")
+    @register("zh-CN", u".*现?在([\w ]+)(几点|时间).*")
     @register("fr-FR", u"(Quel.*heure.*(à|a|au|en) ([\w ]+))|(.*heure actuelle.*(à|a|en) ([\w ]+))")
     def currentTimeIn(self, speech, language):
         view = AddViews(self.refId, dialogPhase="Reflection")
@@ -59,7 +62,10 @@ class timePlugin(Plugin):
         self.sendRequestWithoutAnswer(view)
         
         error = False
-        countryOrCity = re.match(u"(?u).* (in|a|à|au|en) ([\w ]+)$", speech, re.IGNORECASE)
+        if language == 'zh-CN':
+            countryOrCity = re.match(u"(?u).*现?在([\w ]+)(?:几点|时间).*", speech, re.IGNORECASE)
+        else:
+            countryOrCity = re.match(u"(?u).* (in|a|à|au|en) ([\w ]+)$", speech, re.IGNORECASE)
         if countryOrCity != None:
             countryOrCity = countryOrCity.group(countryOrCity.lastindex).strip()
             # lets see what we got, a country or a city... 
