@@ -361,7 +361,7 @@ class smalltalk(Plugin):
 
     @register("de-DE", ".*Bin ich dick.*")
     @register("en-US", ".*Am I fat*")
-    @register("zh-CN", u".*胖.*")
+    @register("zh-CN", u"(.*很胖.*)")
     @register("fr-FR", u"(.*ai l'air.*gros.*)|(.*suis.*gros.*)")
     def st_fat(self, speech, language):
         if language == 'de-DE':

@@ -154,7 +154,7 @@ class timerPlugin(Plugin):
             'fr-FR': u'.*(pause|pose|suspend|interromp).*minuteur'
         }, 'resetTimer': {
             'en-US': '.*(cancel|reset|stop).*timer',
-            'zh-CN': u'(止|取消).*计时.*',
+            'zh-CN': u'(停止|取消).*计时.*',
             'fr-FR': u'.*(annule|reset|arret|arrêt|zero|zéro|stop).*minuteur'
         }, 'resumeTimer': {
             'en-US': '.*(resume|thaw|continue).*timer',
