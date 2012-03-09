@@ -31,7 +31,7 @@ class startRequestHandler(Plugin):
         
         lang = language.split("-")[0]
 
-        resultCallback1View = AddViews(refId="", views=[AssistantUtteranceView(dialogIdentifier="WebSearch#initiateWebSearch", text=webSearchAnswerText[lang].format(u"„{0}“".format(webSearchQuery)), speakableText=webSearchAnswerText[lang].format(webSearchQuery))])
+        resultCallback1View = AddViews(refId="", views=[AssistantUtteranceView(dialogIdentifier="WebSearch#initiateWebSearch", text=webSearchAnswerText[lang].format(u"“{0}”".format(webSearchQuery)), speakableText=webSearchAnswerText[lang].format(webSearchQuery))])
         
         search = WebSearch(refId="", aceId="", query=webSearchQuery)
         resultCallback3View = AddViews(refId="", views=[AssistantUtteranceView(dialogIdentifier="WebSearch#fatalResponse", text=webSearchAnswerFailureText[lang], speakableText=webSearchAnswerFailureText[lang])])
