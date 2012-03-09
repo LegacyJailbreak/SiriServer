@@ -150,25 +150,25 @@ class timerPlugin(Plugin):
             'fr-FR': u'un|une|le',
         }, 'pauseTimer': {
             'en-US': '.*(pause|freeze|hold).*timer',
-            'zh-CN': u'.*暂停.*计时.*',
+            'zh-CN': u'暂停.*计时.*',
             'fr-FR': u'.*(pause|pose|suspend|interromp).*minuteur'
         }, 'resetTimer': {
             'en-US': '.*(cancel|reset|stop).*timer',
-            'zh-CN': u'.*(止|取消).*计时.*',
+            'zh-CN': u'(止|取消).*计时.*',
             'fr-FR': u'.*(annule|reset|arret|arrêt|zero|zéro|stop).*minuteur'
         }, 'resumeTimer': {
             'en-US': '.*(resume|thaw|continue).*timer',
-            'zh-CN': u'.*继续.*计时.*',
+            'zh-CN': u'继续.*计时.*',
             'fr-FR': u'.*(reprend|continue|relance).*minuteur'
         }, 'setTimer': {
             #'fr-FR': u'.*minuteur.*\s+([0-9/ ]*|un|une|le|la|pour|sur)\s+(secs?|secondes?|mins?|minutes?|hrs?|heures?)'
             # 'en-US': '.*timer[^0-9]*(((([0-9/ ]*|a|an|the)\s+(seconds?|secs?|minutes?|mins?|hours?|hrs?))\s*(and)?)+)'
-            'en-US': '.*timer[^0-9]*(?P<length>([0-9/ ]|seconds?|secs?|minutes?|mins?|hours?|hrs?|and|the|an|a){2,})',
-            'zh-CN': u'(?u).*计时\s*((?P<h>[\w ]+)小时)?\s*((?P<m>[\w ]+)分)?钟?\s*((?P<s>[\w ]+)秒)?钟?',
+            'en-US': 'timer[^0-9]*(?P<length>([0-9/ ]|seconds?|secs?|minutes?|mins?|hours?|hrs?|and|the|an|a){2,})',
+            'zh-CN': u'(?u)^[^暂停止取消继续显示]*计时\s*((?P<h>[\w ]+)小时)?\s*((?P<m>[\w ]+)分)?钟?\s*((?P<s>[\w ]+)秒)?钟?',
             'fr-FR': '.*minuteur[^0-9]*(?P<length>([0-9/ ]|secondes?|secs?|minutes?|mins?|heures?|hrs?|et){2,})'
         }, 'showTimer': {
             'en-US': '.*(show|display|see).*timer',
-            'zh-CN': u'.*显示.*计时.*',
+            'zh-CN': u'显示.*计时.*',
             'fr-FR': u'.*(montre|affiche|voir).*minuteur'
         }, 'timerLength': {
             'en-US': '([0-9][0-9 /]*|an|a|the)\s+(seconds?|secs?|minutes?|mins?|hours?|hrs?)',
@@ -189,7 +189,7 @@ class timerPlugin(Plugin):
             if ch_hour != 0:
                 timer_length += str(ch_hour) + u"小时"
             if ch_min != 0:
-                timer_length += str(ch_min) + u"分"
+                timer_length += str(ch_min) + u"分钟"
             if ch_sec != 0:
                 timer_length += str(ch_sec) + u"秒"
             duration = ch_hour * 3600 + ch_min * 60 + ch_sec
