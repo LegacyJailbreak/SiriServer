@@ -76,11 +76,11 @@ class alarmPlugin(Plugin):
                 "fr-FR": u"Réglage de l'alarme\u2026"
             }, "alarmWasSet": {
                 "en-US": "Your alarm is set for {0}:{1} {2}.",
-                "zh-CN": u"您的闹钟已设在 {0} 点 {1} 分{2}。",
+                "zh-CN": u"您的闹钟已设在{0}点{1}分 {2}。",
                 "fr-FR": u"Votre alarme est programmée pour {0}:{1} {2}"
             }, "alarmSetWithLabel": {
                 "en-US": "Your alarm {0} {1} is set for {2}:{3} {4}.",
-                "zh-CN": u"您的闹钟“{0}”已设在 {2} 点 {3} 分 {4}。",
+                "zh-CN": u"您的闹钟“{0}”已设在{2}点{3}分 {4}。",
                 "fr-FR": u"Votre alarme {0} {1} est programmée pour {2}:{3} {4}"
             }
         }

@@ -134,7 +134,7 @@ class timerPlugin(Plugin):
                 'fr-FR': u'C\'est reparti.'
             }, "timerWasSet": {
                 "en-US": "Your timer is set for {0}.",
-                'zh-CN': u'您的计时器已设成 {0}。',
+                'zh-CN': u'您的计时器已设为{0}。',
                 "fr-FR": "Votre minuteur est en marche pour {0}."
             }, "wontSetTimer": {
                 "en-US": "OK.",
@@ -154,7 +154,7 @@ class timerPlugin(Plugin):
             'fr-FR': u'.*(pause|pose|suspend|interromp).*minuteur'
         }, 'resetTimer': {
             'en-US': '.*(cancel|reset|stop).*timer',
-            'zh-CN': u'.*停止.*计时.*',
+            'zh-CN': u'.*(止|取消).*计时.*',
             'fr-FR': u'.*(annule|reset|arret|arrêt|zero|zéro|stop).*minuteur'
         }, 'resumeTimer': {
             'en-US': '.*(resume|thaw|continue).*timer',
@@ -181,11 +181,11 @@ class timerPlugin(Plugin):
     @register("fr-FR", res['setTimer']['fr-FR'])
     def setTimer(self, speech, language):
         m = re.match(timerPlugin.res['setTimer'][language], speech, re.IGNORECASE)
+        timer_length = u""
         if language == 'zh-CN':
             ch_hour = toNum(m.group('h'))
             ch_min = toNum(m.group('m'))
             ch_sec = toNum(m.group('s'))
-            timer_length = u""
             if ch_hour != 0:
                 timer_length += str(ch_hour) + u"小时"
             if ch_min != 0:

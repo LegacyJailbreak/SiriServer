@@ -23,7 +23,7 @@ class wikiPedia(Plugin):
     
     @register("de-DE", ".*suche.*wikipedia (.*)")    
     @register("en-US", "wikipedia (.*)")
-    @register("zh-CN", u"维基(搜索)?(.*)")
+    @register("zh-CN", u"维基(搜索)?([\w ]+)")
     @register("fr-FR", u".*cherche (.*) sur wikipedia|.*cherche (.*) sur wiki|.*(wikipedia|wiki) (.*)")
     def askWiki(self, speech, language, regex):
         wikiLanguage=language[0:2]

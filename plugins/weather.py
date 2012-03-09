@@ -53,14 +53,14 @@ class weatherPlugin(Plugin):
                             }, 
                         "forecast":{
                             "DAILY": {
-                                0:{"de-DE": u"Hier ist die Vorhersage für {0}, {1}", "en-US": u"Here is the forecast for {0}, {1}", "fr-FR": u"Voici les prévisions pour {0}, {1}", "zh-CN": u"这是 {0}，{1} 的天气预报"},
-                                1:{"de-DE": u"Hier ist die Wetterprognose für {0}, {1}", "en-US": u"This is the forecast for {0}, {1}", "fr-FR": u"Voilà les prévisions pour {0}, {1}", "zh-CN": u"这是 {0}，{1} 的天气预报"},
-                                2:{"de-DE": u"Ich habe folgende Vorhersage für {0}, {1} gefunden", "en-US": u"I found the following forecast for {0}, {1}", "fr-FR": u"J'ai trouvé les prévisions suivantes pour {0}, {1}.", "zh-CN": u"我找到了 {0}，{1} 的天气预报"},
+                                0:{"de-DE": u"Hier ist die Vorhersage für {0}, {1}", "en-US": u"Here is the forecast for {0}, {1}", "fr-FR": u"Voici les prévisions pour {0}, {1}", "zh-CN": u"这是{1}{0}的天气预报"},
+                                1:{"de-DE": u"Hier ist die Wetterprognose für {0}, {1}", "en-US": u"This is the forecast for {0}, {1}", "fr-FR": u"Voilà les prévisions pour {0}, {1}", "zh-CN": u"这是{1}{0}的天气预报"},
+                                2:{"de-DE": u"Ich habe folgende Vorhersage für {0}, {1} gefunden", "en-US": u"I found the following forecast for {0}, {1}", "fr-FR": u"J'ai trouvé les prévisions suivantes pour {0}, {1}.", "zh-CN": u"我找到了{1}{0}的天气预报"},
                                 },
                             "HOURLY": {
-                                0:{"de-DE": u"Hier ist die heutige Vorhersage für {0}, {1}", "en-US": u"Here is today's forecast for {0}, {1}","fr-FR": u"Voici les prévisions d'aujourd'hui pour {0}, {1}.", "zh-CN": u"这是今天 {0}，{1} 的天气预报"},
-                                1:{"de-DE": u"Hier ist die Wetterprognose von heute für {0}, {1}", "en-US": u"This is today's forecast for {0}, {1}", "fr-FR": u"Voici les prévisions d'aujourd'hui pour {0}, {1}.", "zh-CN": u"这是今天 {0}，{1} 的天气预报"},
-                                2:{"de-DE": u"Ich habe folgende Tagesprognose für {0}, {1} gefunden", "en-US": u"I found the following hourly forecast for {0}, {1}","fr-FR": u"J'ai trouvé les prévisions pour {0}, {1}.", "zh-CN": u"我找到了今天 {0}，{1} 的天气预报"},
+                                0:{"de-DE": u"Hier ist die heutige Vorhersage für {0}, {1}", "en-US": u"Here is today's forecast for {0}, {1}","fr-FR": u"Voici les prévisions d'aujourd'hui pour {0}, {1}.", "zh-CN": u"这是今天{1}{0}的天气预报"},
+                                1:{"de-DE": u"Hier ist die Wetterprognose von heute für {0}, {1}", "en-US": u"This is today's forecast for {0}, {1}", "fr-FR": u"Voici les prévisions d'aujourd'hui pour {0}, {1}.", "zh-CN": u"这是今天{1}{0}的天气预报"},
+                                2:{"de-DE": u"Ich habe folgende Tagesprognose für {0}, {1} gefunden", "en-US": u"I found the following hourly forecast for {0}, {1}","fr-FR": u"J'ai trouvé les prévisions pour {0}, {1}.", "zh-CN": u"我找到了今天{1}{0}的天气预报"},
                                 }
                         },
                         "failure": {
