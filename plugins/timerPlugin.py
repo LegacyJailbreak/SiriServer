@@ -182,7 +182,17 @@ class timerPlugin(Plugin):
     def setTimer(self, speech, language):
         m = re.match(timerPlugin.res['setTimer'][language], speech, re.IGNORECASE)
         if language == 'zh-CN':
-            duration = toNum(m.group('h')) * 3600 + toNum(m.group('m')) * 60 + toNum(m.group('s'))
+            ch_hour = toNum(m.group('h'))
+            ch_min = toNum(m.group('m'))
+            ch_sec = toNum(m.group('s'))
+            timer_length = u""
+            if ch_hour != 0:
+                timer_length += str(ch_hour) + u"小时"
+            if ch_min != 0:
+                timer_length += str(ch_min) + u"分"
+            if ch_sec != 0:
+                timer_length += str(ch_sec) + u"秒"
+            duration = ch_hour * 3600 + ch_min * 60 + ch_sec
         else:
             timer_length = m.group('length')
             duration = parse_timer_length(timer_length, language)

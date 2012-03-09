@@ -127,11 +127,16 @@ class weatherPlugin(Plugin):
         self.connection.send_object(view)
 
         if language == "zh-CN":
-            countryOrCity = re.match(u"(?u)(.*天)?([\w ]+[^的])?.*天气.*", speech, re.IGNORECASE)
+            countryOrCity = re.match(u"(?u)(?:.*天)?([\w ]+[^的])?.*天气.*", speech, re.IGNORECASE)
+            if countryOrCity != None:
+                countryOrCity = countryOrCity.group(1)
         else:
             countryOrCity = re.match(u"(?u).* (a|à|de|pour|dans|en|in) ([\w ]+)", speech, re.IGNORECASE)
         if countryOrCity != None:
-            countryOrCity = countryOrCity.group(countryOrCity.lastindex).strip()
+            if language == "zh-CN":
+                countryOrCity = countryOrCity.strip()
+            else:
+                countryOrCity = countryOrCity.group(countryOrCity.lastindex).strip()
             print "found forecast"
             # lets see what we got, a country or a city... 
             # lets use google geocoding API for that
