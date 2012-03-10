@@ -42,7 +42,7 @@ class help(Plugin):
     
     @register("de-DE", "(Hilfe)|(Befehle)")
     @register("en-US", "(Help)|(Commands)")
-    @register("zh-CN", u"(帮助)|(命令)")
+    @register("zh-CN", u"(显示)?(帮助|命令)")
     def st_hello(self, speech, language):
         if language == 'de-DE':
             self.say(u"Das sind die Befehle die in Deiner Sprache verfügbar sind:")
