@@ -99,7 +99,7 @@ InterruptCall= {
 }
 
 InterruptCallResponse= {
-    'fr-FR' : [u"D'accord.",u"Ok.",u"Pas de problème.",u"Aucun soucis"]
+    'fr-FR' : [u"D'accord.",u"Ok.",u"Pas de problème.",u"Aucun soucis"],
     'zh-CN' : [u"好的。",u"可以。",u"没问题。"]
 }
 
