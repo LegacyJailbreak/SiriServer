@@ -47,7 +47,7 @@ class weatherPlugin(Plugin):
     localizations = {"weatherForecast": 
                         {"search":{
                             0:{"de-DE": u"Einen Moment Geduld bitte...", "en-US": "Checking my sources...", "fr-FR": u"Je vérifie mes sources...", "zh-CN": u"正在获取来源…"},
-                            1:{"de-DE": u"Ich suche nach der Vorhersage ...", "en-US": "Please wait while I check that...", "fr-FR": "Je regarde...", "zh-CN": u"请稍等，正在查询…"},
+                            1:{"de-DE": u"Ich suche nach der Vorhersage ...", "en-US": "Please wait while I check that...", "fr-FR": "Je regarde...", "zh-CN": u"请稍等…"},
                             2:{"de-DE": u"Einen Moment bitte ...", "en-US": "One moment please...", "fr-FR":"Un instant...", "zh-CN": u"请稍后…"},
                             3:{"de-DE": u"Ich suche nach Wetterdaten...", "en-US": "Trying to get weather data for this location..." ,"fr-FR": u"Je récupère la météo de cet endroit..." ,"zh-CN": u"正在获取当地天气信息…"},
                             }, 

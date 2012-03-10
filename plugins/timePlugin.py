@@ -20,11 +20,11 @@ class timePlugin(Plugin):
                         {"search":{"de-DE": "Es wird gesucht ...", "en-US": "Looking up ...", "fr-FR": u"Je cherche ...", "zh-CN": u"正在查找…"}, 
                          "currentTime": {"de-DE": "Es ist @{fn#currentTime}", "en-US": "It is @{fn#currentTime}", "fr-FR": u"Il est @{fn#currentTime}", "zh-CN": u"现在是 @{fn#currentTime}"}}, 
                      "currentTimeIn": 
-                        {"search":{"de-DE": "Es wird gesucht ...", "en-US": "Looking up ...", "fr-FR": "Je cherche ...", "zh-CN": "正在查找…"}, 
+                        {"search":{"de-DE": "Es wird gesucht ...", "en-US": "Looking up ...", "fr-FR": "Je cherche ...", "zh-CN": u"正在查找…"}, 
                          "currentTimeIn": 
                                 {
-                                "tts": {"de-DE": u"Die Uhrzeit in {0},{1} ist @{{fn#currentTimeIn#{2}}}:", "en-US": "The time in {0},{1} is @{{fn#currentTimeIn#{2}}}:", "fr-FR": u"Il est  @{{fn#currentTimeIn#{2}}} à {0}, {1}", "zh-CN": u"在 {0}，{1} 的时间是 @{{fn#currentTimeIn#{2}}}"},
-                                "text": {"de-DE": u"Die Uhrzeit in {0}, {1} ist @{{fn#currentTimeIn#{2}}}:", "en-US": "The time in {0}, {1} is @{{fn#currentTimeIn#{2}}}:", "fr-FR": u"Il est  @{{fn#currentTimeIn#{2}}} à {0}, {1}", "zh-CN": u"在 {0}，{1} 的时间是 @{{fn#currentTimeIn#{2}}}"}
+                                "tts": {"de-DE": u"Die Uhrzeit in {0},{1} ist @{{fn#currentTimeIn#{2}}}:", "en-US": "The time in {0},{1} is @{{fn#currentTimeIn#{2}}}:", "fr-FR": u"Il est  @{{fn#currentTimeIn#{2}}} à {0}, {1}", "zh-CN": u"{1}{0}的时间是 @{{fn#currentTimeIn#{2}}}"},
+                                "text": {"de-DE": u"Die Uhrzeit in {0}, {1} ist @{{fn#currentTimeIn#{2}}}:", "en-US": "The time in {0}, {1} is @{{fn#currentTimeIn#{2}}}:", "fr-FR": u"Il est  @{{fn#currentTimeIn#{2}}} à {0}, {1}", "zh-CN": u"{1}{0}的时间是 @{{fn#currentTimeIn#{2}}}"}
                                 }
                         },
                     "failure": {
