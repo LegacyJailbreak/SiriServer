@@ -168,6 +168,7 @@ class phonecallPlugin(Plugin):
         namelen = len(personToLookup)
         while namelen > 0:
             search.name = personToLookup[0:namelen]
+            print "try: " + search.name
             answerObj = self.getResponseForRequest(search)
             if ObjectIsCommand(answerObj, PersonSearchCompleted):
                 answer = PersonSearchCompleted(answerObj)
@@ -288,9 +289,8 @@ class phonecallPlugin(Plugin):
         personToCall = regex.group('name')
         if (language == "zh-CN") and (personToCall == None):
             personToCall = regex.group('name2')
-        print "PersonToCall : "+personToCall
-        numberType = regex.group('type') if type in regex.groupdict() else None
-        print u"numberType : " +numberType
+        numberType = regex.group('type')
+        print "PersonToCall : " + personToCall + " Type: " + numberType
         numberType = self.getNumberTypeForName(numberType, language)
         print u"numberType : " +str(numberType)
         persons = self.searchUserByName(personToCall)
