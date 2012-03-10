@@ -165,24 +165,27 @@ class phonecallPlugin(Plugin):
     def searchUserByName(self, personToLookup):
         search = PersonSearch(self.refId)
         search.scope = PersonSearch.ScopeLocalValue
-        search.name = personToLookup
-        answerObj = self.getResponseForRequest(search)
-        if ObjectIsCommand(answerObj, PersonSearchCompleted):
-            answer = PersonSearchCompleted(answerObj)
-            return answer.results if answer.results != None else []
-        else:
-            raise StopPluginExecution("Unknown response: {0}".format(answerObj))
-        return []
+        namelen = len(personToLookup)
+        while namelen > 0:
+            search.name = personToLookup[0:namelen]
+            answerObj = self.getResponseForRequest(search)
+            if ObjectIsCommand(answerObj, PersonSearchCompleted):
+                answer = PersonSearchCompleted(answerObj)
+            else:
+                raise StopPluginExecution("Unknown response: {0}".format(answerObj))
+            if answer.results != None
+                break
+            namelen = namelen - 1
+        return answer.results if answer.results != None else []
            
     def getNumberTypeForName(self, name, language):
         # q&d
         if name != None:
-            name = name.decode('utf-8').lower().encode('utf-8')
-            if name in namesToNumberTypes[language]:
-                return namesToNumberTypes[language][name]
+            if name.lower() in namesToNumberTypes[language]:
+                return namesToNumberTypes[language][name.lower()]
             else:
                 for key in numberTypesLocalized.keys():
-                    if numberTypesLocalized[key][language].decode('utf-8').lower().encode('utf-8') == name:
+                    if numberTypesLocalized[key][language].lower() == name.lower():
                         return numberTypesLocalized[key][language]
         return None
     
@@ -287,6 +290,7 @@ class phonecallPlugin(Plugin):
             personToCall = regex.group('name2')
         print "PersonToCall : "+personToCall
         numberType = regex.group('type') if type in regex.groupdict() else None
+        print u"numberType : " +numberType
         numberType = self.getNumberTypeForName(numberType, language)
         print u"numberType : " +str(numberType)
         persons = self.searchUserByName(personToCall)
