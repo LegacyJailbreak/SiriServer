@@ -278,12 +278,12 @@ class phonecallPlugin(Plugin):
     
     @register("de-DE", "ruf. (?P<name>[\w ]+).*(?P<type>arbeit|zuhause|privat|mobil|handy.*|iPhone.*|pager)? an")
     @register("en-US", "(make a )?call (to )?(?P<name>[\w ]+).*(?P<type>work|home|mobile|main|iPhone|pager)?")
-    @register("en-US", u".*(呼叫|电话|拨号|打)给?(?P<name>[\w ]+).*标签为?(?P<type>工作|家庭|住宅|移动|手机)?")
+    @register("zh-CN", u".*(呼叫|电话|拨号|打)给?(?P<name>[\w ]+).*标签为?(?P<type>工作|家庭|住宅|移动|手机)?")
     @register("fr-FR", u"(fai(s|t) un )?(appel|appelle|appeler?) (à )?(?P<name>[\w ]+).*(?P<type>travail|maison|mobile|gsm|iPhone|principal|biper)?")
     def makeCall(self, speech, language, regex):
         personToCall = regex.group('name')
         print "PersonToCall : "+personToCall
-        numberType = str.lower(regex.group('type')) if type in regex.groupdict() else None
+        numberType = regex.group('type').decode("utf-8").lower().encode("utf-8") if type in regex.groupdict() else None
         numberType = self.getNumberTypeForName(numberType, language)
         print u"numberType : " +str(numberType)
         persons = self.searchUserByName(personToCall)
