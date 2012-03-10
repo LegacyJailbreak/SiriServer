@@ -173,7 +173,7 @@ class phonecallPlugin(Plugin):
                 answer = PersonSearchCompleted(answerObj)
             else:
                 raise StopPluginExecution("Unknown response: {0}".format(answerObj))
-            if answer.results != None
+            if answer.results != None:
                 break
             namelen = namelen - 1
         return answer.results if answer.results != None else []
