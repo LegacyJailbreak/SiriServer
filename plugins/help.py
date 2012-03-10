@@ -31,7 +31,7 @@ with open(config_file, "r") as fh:
                         
                     elif tline.startswith("@register(\"zh-CN\","):
                         tline = tline.replace('@register','').replace('(','').replace(')','').replace('\"','').replace('.*','…').replace('zh-CN,','').replace('[a-zA-Z0-9]+','').replace('\w','').replace('|','/').replace("res['setAlarm']['zh-CN']",'…闹钟定在/订在/设置/设为…点整/点钟/点半/点/小时(…分/分钟)(叫做…)').replace("res['setTimer']['zh-CN']",'…计时…小时…分(钟)…秒(钟)').replace("res['pauseTimer']['zh-CN']",'暂停…计时…').replace("res['resetTimer']['zh-CN']",'停止/取消…计时…').replace("res['resumeTimer']['zh-CN']",'继续…计时…').replace("res['showTimer']['zh-CN']",'显示…计时…')
-                        tline = tline.replace('u','').replace('+','').replace('?','').replace(u"[^你]",'').replace('[]','…').replace('[','').replace(']','').replace(':','')
+                        tline = tline.replace('u','').replace('+','').replace('?','').replace(u"[^你]",'').replace('[]','…').replace('[','').replace(']','').replace(':','').replace('P<name>','').replace('P<name2>','').replace('P<type>','')
                         tline = tline.strip()
                         tline_answer_zh = tline_answer_zh +'\n' + "".join(tline)
         

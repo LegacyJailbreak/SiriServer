@@ -64,7 +64,8 @@ class talkToMe(Plugin):
                 locale.setlocale(locale.LC_ALL, 'zh-CN')
             except:
                 pass
-            result=now.strftime("今天是%Y年%m月%d日，第%W周，%A。")
+            result = u"今天是"
+            result += now.strftime("%Y年%m月%d日，第%W周，%A。").decode("utf-8")
             self.say(result)
         else:
             try:
