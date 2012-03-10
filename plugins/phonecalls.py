@@ -177,11 +177,12 @@ class phonecallPlugin(Plugin):
     def getNumberTypeForName(self, name, language):
         # q&d
         if name != None:
-            if name.lower() in namesToNumberTypes[language]:
-                return namesToNumberTypes[language][name.lower()]
+            name = name.decode('utf-8').lower().encode('utf-8')
+            if name in namesToNumberTypes[language]:
+                return namesToNumberTypes[language][name]
             else:
                 for key in numberTypesLocalized.keys():
-                    if numberTypesLocalized[key][language].lower() == name.lower():
+                    if numberTypesLocalized[key][language].decode('utf-8').lower().encode('utf-8') == name:
                         return numberTypesLocalized[key][language]
         return None
     
@@ -278,12 +279,14 @@ class phonecallPlugin(Plugin):
     
     @register("de-DE", "ruf. (?P<name>[\w ]+).*(?P<type>arbeit|zuhause|privat|mobil|handy.*|iPhone.*|pager)? an")
     @register("en-US", "(make a )?call (to )?(?P<name>[\w ]+).*(?P<type>work|home|mobile|main|iPhone|pager)?")
-    @register("zh-CN", u".*(呼叫|电话|拨号|打)给?(?P<name>[\w ]+).*标签为?(?P<type>工作|家庭|住宅|移动|手机)?")
+    @register("zh-CN", u".*(呼叫|电话|拨号|打)给?(((?P<name>[\w ]+)类型为?(?P<type>工作|家庭|住宅|移动|手机)?)|(?P<name2>[\w ]+))")
     @register("fr-FR", u"(fai(s|t) un )?(appel|appelle|appeler?) (à )?(?P<name>[\w ]+).*(?P<type>travail|maison|mobile|gsm|iPhone|principal|biper)?")
     def makeCall(self, speech, language, regex):
         personToCall = regex.group('name')
+        if (language == "zh-CN") and (personToCall == None):
+            personToCall = regex.group('name2')
         print "PersonToCall : "+personToCall
-        numberType = regex.group('type').decode("utf-8").lower().encode("utf-8") if type in regex.groupdict() else None
+        numberType = regex.group('type') if type in regex.groupdict() else None
         numberType = self.getNumberTypeForName(numberType, language)
         print u"numberType : " +str(numberType)
         persons = self.searchUserByName(personToCall)
