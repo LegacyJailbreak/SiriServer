@@ -58,7 +58,7 @@ numberTypesLocalized= {
 '_$!<Main>!$_': {'en-US': u"main", 'de-DE': u"Hauptnummer",'fr-FR': u"principal",'zh-CN': u"主要"},
 '_$!<HomeFAX>!$_': {'en-US': u"home fax", 'de-DE': u'private Faxnummer', 'fr-FR': u'fax domicile', 'zh-CN': u'住宅传真'},
 '_$!<WorkFAX>!$_': {'en-US': u"work fax", 'de-DE': u"geschäftliche Faxnummer", 'fr-FR': u"fax bureau", 'zh-CN': u'工作传真'},
-'_$!<OtherFAX>!$_': {'en-US': u"_$!<OtherFAX>!$_", 'de-DE': u"_$!<OtherFAX>!$_", 'fr-FR': u"_$!<OtherFAX>!$_", 'zh-CN': u"_$!<OtherFAX>!$_"},
+'_$!<OtherFAX>!$_': {'en-US': u"_$!<OtherFAX>!$_", 'de-DE': u"_$!<OtherFAX>!$_", 'fr-FR': u"_$!<OtherFAX>!$_", 'zh-CN': u"其他传真"},
 '_$!<Pager>!$_': {'en-US': u"pager", 'de-DE': u"Pagernummer", 'fr-FR': u"biper", 'zh-CN': u"传呼"},
 '_$!<Other>!$_':{'en-US': u"other phone", 'de-DE': u"anderes Telefon", 'fr-FR': u"autre", 'zh-CN': u"其他"}
 }
@@ -196,7 +196,9 @@ class phonecallPlugin(Plugin):
         phoneToCall = None
         if numberType != None:
             # try to find the phone that fits the numberType
-            phoneToCall = filter(lambda x: x.label == numberType, person.phones)
+            listToCall = filter(lambda x: x.label == numberType, person.phones)
+            if len(listToCall) == 1:
+                phoneToCall = listToCall[0]
         else:
             favPhones = filter(lambda y: y.favoriteVoice if hasattr(y, "favoriteVoice") else False, person.phones)
             if len(favPhones) == 1:
