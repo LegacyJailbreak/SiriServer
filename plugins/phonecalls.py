@@ -100,6 +100,7 @@ InterruptCall= {
 
 InterruptCallResponse= {
     'fr-FR' : [u"D'accord.",u"Ok.",u"Pas de problème.",u"Aucun soucis"]
+    'zh-CN' : [u"好的。",u"可以。",u"没问题。"]
 }
 
 errorOnCallResponse={'en-US':
@@ -163,10 +164,10 @@ errorOnCallResponse={'en-US':
 class phonecallPlugin(Plugin):
 
     def searchUserByName(self, personToLookup):
-        search = PersonSearch(self.refId)
-        search.scope = PersonSearch.ScopeLocalValue
         namelen = len(personToLookup)
         while namelen > 0:
+            search = PersonSearch(self.refId)
+            search.scope = PersonSearch.ScopeLocalValue
             search.name = personToLookup[0:namelen]
             print "try: " + search.name
             answerObj = self.getResponseForRequest(search)
@@ -290,7 +291,7 @@ class phonecallPlugin(Plugin):
         if (language == "zh-CN") and (personToCall == None):
             personToCall = regex.group('name2')
         numberType = regex.group('type')
-        print "PersonToCall : " + personToCall + " Type: " + numberType
+        print "PersonToCall : " + personToCall
         numberType = self.getNumberTypeForName(numberType, language)
         print u"numberType : " +str(numberType)
         persons = self.searchUserByName(personToCall)
