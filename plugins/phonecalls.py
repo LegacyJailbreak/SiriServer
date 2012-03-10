@@ -87,7 +87,7 @@ errorNumberTypes= {
 errorNumberNotPresent= {
 'de-DE': u"Ich habe diese {0} von {1} nicht, aber eine andere.",
 'en-US': u"Sorry, I don't have a {0} number from {1}, but another.",
-'zh-CN': u"抱歉，我找不到 {0} 的号码来自 {1}，但找到另一个。",
+'zh-CN': u"抱歉，我找不到 {1} 类型为 {0} 的号码，但找到了其他类型的号码。",
 'fr-FR': u"Désolé, je n'ai pas un numéro de {0} pour {1}, mais un autre."
 }
 
@@ -207,7 +207,7 @@ class phonecallPlugin(Plugin):
             # lets check if there is more than one number
             if len(person.phones) == 1:
                 if numberType != None:
-                    self.say(errorNumberNotPresent.format(numberTypesLocalized[numberType][language], person.fullName))
+                    self.say(errorNumberNotPresent[language].format(numberTypesLocalized[numberType][language], person.fullName))
                 phoneToCall = person.phones[0]
             else:
                 # damn we need to ask the user which one he wants...
