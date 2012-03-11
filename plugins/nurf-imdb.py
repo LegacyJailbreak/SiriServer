@@ -131,7 +131,7 @@ class nurf_imdb(Plugin):
                     self.say("Sorry, I couldnt find any characters by that name in " + movietitle)
                     self.complete_request()
 
-    @register("en-US",  "(find movie)* ([\w ]+)")
+    @register("en-US",  "(find|show).*movie ([\w ]+)")
     @register("zh-CN",  u"找?电影([\w ]+)")
     def move_lookup(self,  speech,  language,  regex):
        
