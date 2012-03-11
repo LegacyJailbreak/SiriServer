@@ -137,7 +137,7 @@ class location(Plugin):
                     self.say(u"这是{0}".format(the_location))
                     the_header=u"{0}".format(the_location)
                 else:
-                    the_header=u"Here is {0}".format(the_location)
+                    self.say(u"Here is {0}".format(the_location))
                     the_header=u"{0}".format(the_location)
                 view = AddViews(self.refId, dialogPhase="Completion")
                 s_Location=Location(the_header, city, city, "", countryCode, "", str(location['lat']), str(location['lng']))
