@@ -45,7 +45,7 @@ reload(sys)
 sys.setdefaultencoding( "utf-8" )
 
 class HandleConnection(ssl_dispatcher):
-    __not_recognized =  {"de-DE": u"Entschuldigung, ich verstehe \"{0}\" nicht.", "en-US": u"Sorry, I don't understand '{0}'.", "fr-FR": u"Désolé je ne comprends pas ce que \"{0}\" veut dire.", "zh-CN": u"对不起，我不知道“{0}”是什么意思。"}
+    __not_recognized =  {"de-DE": u"Entschuldigung, ich verstehe \"{0}\" nicht.", "en-US": u"Sorry, I don't understand ‘{0}’.", "fr-FR": u"Désolé je ne comprends pas ce que \"{0}\" veut dire.", "zh-CN": u"对不起，我不知道“{0}”是什么意思。"}
     __websearch =  {"de-DE": u"Websuche", "en-US": u"Search the web", "fr-FR": u"Rechercher sur le Web", "zh-CN": u"搜索网页"}
     def __init__(self, conn, lang):
         asyncore.dispatcher_with_send.__init__(self, conn)

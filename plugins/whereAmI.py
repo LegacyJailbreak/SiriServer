@@ -138,6 +138,7 @@ class location(Plugin):
                     the_header=u"{0}".format(the_location)
                 else:
                     the_header=u"Here is {0}".format(the_location)
+                    the_header=u"{0}".format(the_location)
                 view = AddViews(self.refId, dialogPhase="Completion")
                 s_Location=Location(the_header, city, city, "", countryCode, "", str(location['lat']), str(location['lng']))
                 mapsnippet = SiriMapItemSnippet(items=[SiriMapItem(the_header, s_Location, "BUSINESS_ITEM")])
