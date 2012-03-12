@@ -9,7 +9,7 @@ config_file="plugins.conf"
 pluginPath="plugins"
 from plugin import *
 tline_answer_de = ''
-tline_answer_en = ''
+tline_answer_en = u'Commands:'
 tline_answer_zh = u'可用命令：'
 
 with open(config_file, "r") as fh:
@@ -26,7 +26,8 @@ with open(config_file, "r") as fh:
                         tline_answer_de = tline_answer_de +'\n' + "".join(tline)
                     
                     elif tline.startswith("@register(\"en-US\","):
-                        tline = tline.replace('@register','').replace('(','').replace(')','').replace('\"','').replace('.','').replace('en-US, ','').replace('[a-zA-Z0-9]+','').replace('\w','').replace('|',' or  ')
+                        tline = tline.replace('@register','').replace('(','').replace(')','').replace('\"','').replace('.*','... ').replace('en-US,','').replace('[a-zA-Z0-9]+','').replace('\w','').replace('|','/').replace("res['setAlarm']['en-US']",'... set... alarm for... am/pm... bcalled/named/labeled...').replace("res['setTimer']['en-US']",'...timer... seconds/minutes/hours').replace("res['pauseTimer']['en-US']",'pause/freeze/hold... timer').replace("res['resetTimer']['en-US']",'... cancel/reset/stop... timer').replace("res['resumeTimer']['en-US']",'... resume/thaw/continue... timer').replace("res['showTimer']['en-US']",'... show/display/see... timer')
+                        tline = tline.replace('+','').replace('?','').replace('[]','... ').replace('[','').replace(']','').replace(':','').replace('P<name>','')replace('P<type>','').replace('[a-z]','... ')
                         tline_answer_en = tline_answer_en +'\n' + "".join(tline)
                         
                     elif tline.startswith("@register(\"zh-CN\","):
@@ -41,7 +42,7 @@ with open(config_file, "r") as fh:
 class help(Plugin):
     
     @register("de-DE", "(Hilfe)|(Befehle)")
-    @register("en-US", "(Help)|(Commands)")
+    @register("en-US", "(show)?.*(help|command).*")
     @register("zh-CN", u"(显示)?(帮助|命令)")
     def st_hello(self, speech, language):
         if language == 'de-DE':
@@ -51,6 +52,6 @@ class help(Plugin):
             self.say(u"当前语言的可用命令如下：")
             self.say(tline_answer_zh,' ')
         else:
-            self.say("Here are the command which are possible in your language:")
+            self.say("Here are commands available in your language:")
             self.say(tline_answer_en ,' ')
         self.complete_request()
