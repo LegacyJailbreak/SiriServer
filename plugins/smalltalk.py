@@ -253,7 +253,7 @@ class smalltalk(Plugin):
     @register("de-DE", "(.*Hallo.*)|(.*Hi.*Siri.*)|(Hi)|(Hey)")
     @register("en-US", "(.*Hello.*)|(.*Hi.*Siri.*)|(Hi)|(Hey)")
     @register("fr-FR", ".*(Bonjour|Coucou|Salut)( Siri)?.*")
-    @register("zh-CN", u"(.*你好.*)|(.*嗨.*Siri.*)|(嗨)|(嘿)|(喂)|(哈喽)|(.*Hello.*)|(.*Hi.*)")
+    @register("zh-CN", u"(.*你好.*)|(.*嗨.*Siri.*)|(.*您好.*)|(嗨)|(嘿)|(喂)|(哈喽)|(.*Hello.*)|(.*Hi.*)")
     def st_hello(self, speech, language):
         if language == 'de-DE':
             self.say(u"Hallo {0}!".format(self.user_name()))
@@ -602,18 +602,6 @@ class smalltalk(Plugin):
             self.say("C'est l'iPhone 4S, mais vous êtes trop pauvre pour l'acheter !")
         self.complete_request()
     
-    @register("en-US",".*meaning.*life.*")
-    def st_life_meaning(self, speech, language):
-        if language == 'en-US':
-            self.say("That's easy...it's a philosophical question concerning the purpose and significance of life or existence.")
-        self.complete_request()
-    
-    @register("en-US",".*I.*fat.*")
-    def st_fat(self, speech, language):
-        if language == 'en-US':
-            self.say("I would prefer not to say.")
-        self.complete_request()
-    
     @register("en-US",".*wood.could.*woodchuck.chuck.*")
     def st_woodchuck(self, speech, language):
         if language == 'en-US':
@@ -810,7 +798,7 @@ class smalltalk(Plugin):
         if language == 'en-US':
             self.say("Don't tell me... you were just elected President of the United States, right?")
         elif language == 'zh-CN':
-            self.say(u"先别说，让我猜猜…你不会当美国总统了吧？")
+            self.say(u"先别说，让我猜猜…你不会当上美国总统了吧？")
         if language == 'fr-FR':
             self.say("Ne me dit pas... Tu as gagné à l'EuroMillion, pas vrai ?")
         self.complete_request()

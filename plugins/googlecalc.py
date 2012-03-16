@@ -24,7 +24,7 @@ class UnitsConverter(Plugin):
     
     @register("en-US", "(convert|calculate)* ([\w ]+)")
     @register("en-GB", "(convert|calculate)* ([\w ]+)")
-    @register("zh-CN", u"(计算|转换|换算).*([\w ]+)")
+    @register("zh-CN", u"(计算|转换|换算)([\w ]+)")
     def defineword(self, speech, language, regex):
         Title = regex.group(regex.lastindex)
         Query = urllib.quote_plus(Title.encode("utf-8"))
@@ -36,7 +36,7 @@ class UnitsConverter(Plugin):
             ConvA = result['lhs']
             ConvB = result['rhs'] 
             if language == 'zh-CN':
-                self.say(u"这是我得到的结果…" '\n' +str(ConvA.encode("utf-8")) + "等于" +str(ConvB.encode("utf-8")))
+                self.say(u"这是我得到的结果…" '\n' +str(ConvA.encode("utf-8")) + " 等于 " +str(ConvB.encode("utf-8")))
             else:
                 self.say("Here is what I found..." '\n' +str(ConvA) + " equals, " +str(ConvB))
             self.complete_request()
