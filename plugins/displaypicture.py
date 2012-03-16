@@ -27,7 +27,7 @@ class define(Plugin):
     
     @register("de-DE", "(zeig mir|zeige|zeig).*(bild|zeichnung) (vo. ein..|vo.|aus)* ([\w ]+)")
     @register("en-US", "(display|show me|show).*(picture|image|drawing|illustration) (of|an|a)* ([\w ]+)")
-    @register("zh-CN", u"(显示|给我看)(关于|有关)?([\w ]+)(的图).*")
+    @register("zh-CN", u".*(找|显示|给我看)(关于|有关)?([\w ]+)(的图).*")
     @register("fr-FR", u"(montre|affiche|recherche|cherche|dessine)?.*(photos?|images?|dessins?|illustrations?) (une?|pour|de la|de l'|des|du|de|d'une?|d'|l')* ?([\w ]+)")
     def displaypicture(self, speech, language, regex):
         if language == "zh-CN":
