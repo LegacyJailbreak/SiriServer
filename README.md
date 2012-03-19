@@ -138,7 +138,7 @@ In your mail, just click on the certificate and install it.
 **Installing API Keys**
 
 
-Some of the plugins included require API/APPID keys to use. You'll need to register with the respective websites to obtain these keys.
+Some of the plugins included require API/APPID keys to use. You'll need to register with the respective websites to obtain these keys. Please copy and rename 'apiKeys.conf-SAMPLE' to 'apiKeys.conf' and input your keys.
 
 The general format is as follows:
 
@@ -153,6 +153,7 @@ Register and sign up for an API with the following sites:
 - Wolfram Alpha : [http://products.wolframalpha.com/developers/](http://products.wolframalpha.com/developers/)
 - Wordnik : [http://developer.wordnik.com/](http://developer.wordnik.com/)
 - Weather Wunderground : [http://www.wunderground.com/weather/api/](http://www.wunderground.com/weather/api/)
+- Google Places : [https://developers.google.com/maps/documentation/places/#Authentication](https://developers.google.com/maps/documentation/places/#Authentication) 
 
 ***Why don't you give me your key?***
 
