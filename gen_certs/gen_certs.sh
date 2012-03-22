@@ -51,7 +51,7 @@ replace_dir="${TMP_DIR//\//\\/}"
 sed "s/BASE_DIR/${replace_dir}/g" openssl_base.cnf > openssl.cnf
 
 echo "Creating CA directory"
-mkdir "$TMP_CA_DIR"
+mkdir -p "$TMP_CA_DIR"
 mkdir -p "$TMP_CA_DIR/"{certs,crl,newcerts,private}
 touch "$TMP_CA_DIR/index.txt"
 echo 01 > "$TMP_CA_DIR/crtnumber"
