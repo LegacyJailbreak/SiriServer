@@ -59,10 +59,10 @@ class note(Plugin):
                     }
     @register("en-US", "(.*note [a-zA-Z0-9]+)|(.*create.*note [a-zA-Z0-9]+)|(.*write.*note [a-zA-Z0-9]+)")
     @register("fr-FR", u"(.*créer une note [a-zA-Z0-9]+)|(.*note [a-zA-Z0-9]+)")
-    @register("zh-CN", u"(.*备忘.*)|(.*记录.*)")
+    @register("zh-CN", u"(备忘|记录|记下).*")
     def writeNote(self, speech, language):
         if language == "zh-CN":
-            content_raw = re.match(u"(?u).*(?:备忘|记录)([\w ]+)", speech, re.IGNORECASE)
+            content_raw = re.match(u"(?u)(?:备忘|记录|记下)([\w ]+)", speech, re.IGNORECASE)
         else:
             content_raw = re.match(".*note ([a-zA-Z0-9, ]+)$", speech, re.IGNORECASE)
         if content_raw == None:
