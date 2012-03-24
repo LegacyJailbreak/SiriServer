@@ -104,18 +104,12 @@ class weatherPlugin(Plugin):
             speech = speech.replace(u"in den nächsten Stunden","")
             speech = speech.replace(u"für heute","")
         
-        if (speech.count(u"冷") > 0 or speech.count(u"热") > 0 or speech.count(u"晴") > 0 or speech.count(u"雨") > 0 or speech.count(u"雪") > 0 or speech.count(u"伞") > 0 or speech.count(u"当前") > 0 or speech.count(u"现在") > 0 or speech.count(u"最近") > 0 or speech.count(u"今天") > 0 or speech.count(u"明天") > 0 or speech.count(u"后天") > 0 or speech.count(u"大后天") > 0 or speech.count(u"昨天") > 0 or speech.count(u"前天") > 0 or speech.count(u"大前天") > 0) and language=="zh-CN":
+        if (speech.count(u"冷") > 0 or speech.count(u"热") > 0 or speech.count(u"晴") > 0 or speech.count(u"雨") > 0 or speech.count(u"雪") > 0 or speech.count(u"伞") > 0 or speech.count(u"当前") > 0 or speech.count(u"现在") > 0 or speech.count(u"最近") > 0 or speech.count(u"今天") > 0) and language=="zh-CN":
             viewType = "HOURLY"
             speech = speech.replace(u"当前","")
             speech = speech.replace(u"现在","") 
             speech = speech.replace(u"最近","") 
             speech = speech.replace(u"今天","") 
-            speech = speech.replace(u"明天","") 
-            speech = speech.replace(u"后天","") 
-            speech = speech.replace(u"大后天","") 
-            speech = speech.replace(u"昨天","") 
-            speech = speech.replace(u"前天","") 
-            speech = speech.replace(u"大前天","") 
         
         if language=="en-US":
             speech = speech.replace(" for "," in ")
@@ -126,6 +120,33 @@ class weatherPlugin(Plugin):
             speech = speech.replace(u"in der nächsten Woche","")
             speech = speech.replace(u"nächste Woche","")
             speech = speech.replace(u" für "," in ")
+            
+        if language == 'zh-CN':
+            speech = speech.replace(u"告诉我","") 
+            speech = speech.replace(u"显示","") 
+            speech = speech.replace(u"请问","") 
+            speech = speech.replace(u"明天","") 
+            speech = speech.replace(u"后天","") 
+            speech = speech.replace(u"大后天","") 
+            speech = speech.replace(u"昨天","") 
+            speech = speech.replace(u"前天","") 
+            speech = speech.replace(u"大前天","")
+            speech = speech.replace(u"星期一","")
+            speech = speech.replace(u"星期二","")
+            speech = speech.replace(u"星期三","")
+            speech = speech.replace(u"星期四","")
+            speech = speech.replace(u"星期五","")
+            speech = speech.replace(u"星期六","")
+            speech = speech.replace(u"星期日","")
+            speech = speech.replace(u"星期天","")
+            speech = speech.replace(u"礼拜一","")
+            speech = speech.replace(u"礼拜二","")
+            speech = speech.replace(u"礼拜三","")
+            speech = speech.replace(u"礼拜四","")
+            speech = speech.replace(u"礼拜五","")
+            speech = speech.replace(u"礼拜六","")
+            speech = speech.replace(u"礼拜日","")
+            speech = speech.replace(u"礼拜天","")
      
         error = False
         view = AddViews(refId=self.refId, dialogPhase="Reflection")
