@@ -104,11 +104,18 @@ class weatherPlugin(Plugin):
             speech = speech.replace(u"in den nächsten Stunden","")
             speech = speech.replace(u"für heute","")
         
-        if (speech.count(u"冷") > 0 or speech.count(u"热") > 0 or speech.count(u"晴") > 0 or speech.count(u"雨") > 0 or speech.count(u"雪") > 0 or speech.count(u"伞") > 0 or speech.count(u"当前") > 0 or speech.count(u"现在") > 0 or speech.count(u"最近") > 0) and language=="zh-CN":
+        if (speech.count(u"冷") > 0 or speech.count(u"热") > 0 or speech.count(u"晴") > 0 or speech.count(u"雨") > 0 or speech.count(u"雪") > 0 or speech.count(u"伞") > 0 or speech.count(u"当前") > 0 or speech.count(u"现在") > 0 or speech.count(u"最近") > 0 or speech.count(u"今天") > 0 or speech.count(u"明天") > 0 or speech.count(u"后天") > 0 or speech.count(u"大后天") > 0 or speech.count(u"昨天") > 0 or speech.count(u"前天") > 0 or speech.count(u"大前天") > 0) and language=="zh-CN":
             viewType = "HOURLY"
             speech = speech.replace(u"当前","")
             speech = speech.replace(u"现在","") 
             speech = speech.replace(u"最近","") 
+            speech = speech.replace(u"今天","") 
+            speech = speech.replace(u"明天","") 
+            speech = speech.replace(u"后天","") 
+            speech = speech.replace(u"大后天","") 
+            speech = speech.replace(u"昨天","") 
+            speech = speech.replace(u"前天","") 
+            speech = speech.replace(u"大前天","") 
         
         if language=="en-US":
             speech = speech.replace(" for "," in ")
@@ -127,7 +134,7 @@ class weatherPlugin(Plugin):
         self.connection.send_object(view)
 
         if language == "zh-CN":
-            countryOrCity = re.match(u"(?u)(?:.*天)?([\w ]+[^的])?.*天气.*", speech, re.IGNORECASE)
+            countryOrCity = re.match(u"(?u)([\w ]+[^的])?.*天气.*", speech, re.IGNORECASE)
             if countryOrCity != None:
                 countryOrCity = countryOrCity.group(1)
         else:
