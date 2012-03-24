@@ -33,13 +33,16 @@ def toNum(a, encoding="utf-8"):
     result = 0
     tmp = 0
     Billion = 0
-    error = 0  
+    chs = 0
+    digit = 0
     while count < len(a):
         tmpChr = a[count]
         tmpNum = dict.get(tmpChr, None)
         if tmpNum == None:
-            error = 1
-            break
+            count += 1
+            continue
+        else:
+            chs = 1
         if tmpNum == 100000000:
             result = result + tmp
             result = result * tmpNum
@@ -58,13 +61,14 @@ def toNum(a, encoding="utf-8"):
         elif tmpNum is not None:
             tmp = tmp * 10 + tmpNum
         count += 1
-    if error == 1:
-        try:
-            return int(a)
-        except:
-            return 0
-    result = result + tmp
-    result = result + Billion
+    result += tmp + Billion
+    if (chs == 0) and (result == 0):
+        p = re.compile("[^0-9]*([0-9]+)[^0-9]*").match(a)
+        if p:
+            result = int(p.group(1))
+            digit = 1
+    if ((chs == 1) or (digit == 1)) and (result <= 12) and (a.count(u"晚上") > 0 or a.count(u"夜里") > 0 or a.count(u"下午") > 0):
+        result = (result + 12) % 24
     return result
 
 class alarmPlugin(Plugin):
