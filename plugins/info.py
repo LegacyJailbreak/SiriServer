@@ -15,30 +15,37 @@ class talkToMe(Plugin):
     @register("zh-CN", u".*状态.*")
     def ttm_uptime_status(self, speech, language):
         uptime = None
+        servertype = ' '.join(os.uname())
         freemem = None
         if os.name == "posix":
             uptime = os.popen("uptime").read()
         if sys.platform.startswith('linux'):
             freemem = os.popen("grep MemFree /proc/meminfo").read()
-        if (uptime == None) and (freemem == None):
+        if (uptime == None) and (freemem == None) and (servertype == None):
             if language == 'zh-CN':
                 self.say(u'您的服务器系统不支持状态查询。')
             else:
                 self.say(u"Sorry, I can't get status from you server")
         elif language == 'de-DE':
             self.say('Hier ist der Status:')
+            if servertype != None:
+                self.say(servertype, ' ')
             if uptime != None:
                 self.say(uptime, ' ')
             if freemem != None:
                 self.say(freemem, ' ')
         elif language == 'zh-CN':
             self.say(u'服务器状态')
+            if servertype != None:
+                self.say(servertype, u'这是服务器类型。')
             if uptime != None:
                 self.say(uptime, u'这是运行时间。')
             if freemem != None:
                 self.say(freemem, u'这是剩余内存。')
         else:
             self.say('Here is the status:')
+            if servertype != None:
+                self.say(servertype, 'This is the server system.')
             if uptime != None:
                 self.say(uptime, 'This is running time.')
             if freemem != None:
